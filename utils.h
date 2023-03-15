@@ -13,7 +13,7 @@ typedef struct {
     int height;
 } win_size;
 
-void print_at_coos(int x, int y, char *str);
+void printAtCoos(int x, int y, char *str);
 win_size getWindowSize();
 void showWindowBox();
 

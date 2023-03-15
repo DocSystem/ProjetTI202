@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "geometry.h"
+#include "utils.h"
+#include "algorithm.h"
 
 
 Point* createPoint(int x, int y) {
@@ -27,7 +29,14 @@ Line* createLine(Point* p1, Point* p2) {
     line -> p2 = p2;
 }
 
-void freeLine(line* line){
+void freeLine(Line* line){
     free(line);
 }
 
+void printLine(Line* line) {
+    printf("Line: ");
+    printPoint(line -> p1);
+    printf(" - ");
+    printPoint(line -> p2);
+    traceLine(line);
+}

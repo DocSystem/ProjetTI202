@@ -12,9 +12,10 @@ void showMenu(int menuId) {
 
 int main() {
     Point* p = createPoint(100, 200);
-    printf("Hello, World!\n");
-    printPoint(p);
-    freePoint(p);
+    Point* p2 = createPoint(200, 300);
+    Line* l = createLine(p, p2);
+    printLine(l);
+    freeLine(l);
     // clearScreen();
     // sleep(5);
     return 0;

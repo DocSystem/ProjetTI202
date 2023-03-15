@@ -4,13 +4,14 @@
 
 #include "algorithm.h"
 #include "utils.h"
+#include "geometry.h"
 
 
-void trace_line(Line* line){
+void traceLine(Line* line){
     /* Cet algorithme est inspiré de celui présenté dans le cours de TI202
      * Il vient de cette page : "https://fr.wikipedia.org/wiki/Algorithme_de_trac%C3%A9_de_segment_de_Bresenham"
      * Il a été adapté pour fonctionner avec les coordonnées de la structure Line
-     * et pour fonctionner avec la fonction print_at_coos() de utils.c
+     * et pour fonctionner avec la fonction printAtCoos() de utils.c
      */
     // Déclaration des variables
     int dx, dy;
@@ -39,7 +40,7 @@ void trace_line(Line* line){
                         dx = e * 2;
                         dy = dy * 2;
                         do {
-                            print_at_coos(x1, y1, "-");
+                            printAtCoos(x1, y1, "-");
                             e = e - dy;
                             if (e < 0) {
                                 y1++; // Déplacement diagonal
@@ -55,7 +56,7 @@ void trace_line(Line* line){
                         dy = e * 2;
                         dx = dx * 2;
                         do {
-                            print_at_coos(x1, y1, "-");
+                            printAtCoos(x1, y1, "-");
                             e = e - dx;
                             if (e < 0) {
                                 x1++; // Déplacement diagonal
@@ -74,7 +75,7 @@ void trace_line(Line* line){
                         dx = e * 2;
                         dy = dy * 2;
                         do {
-                            print_at_coos(x1, y1, "-");
+                            printAtCoos(x1, y1, "-");
                             e = e + dy;
                             if (e < 0) {
                                 y1--;
@@ -90,7 +91,7 @@ void trace_line(Line* line){
                         dy = e * 2;
                         dx = dx * 2;
                         do {
-                            print_at_coos(x1, y1, "-");
+                            printAtCoos(x1, y1, "-");
                             e = e + dx;
                             if (e > 0) {
                                 x1++;
@@ -103,7 +104,7 @@ void trace_line(Line* line){
             } else {
                 // Vecteur horizontal vers la droite
                 do {
-                    print_at_coos(x1, y1, "-");
+                    printAtCoos(x1, y1, "-");
                     x1++;
                 } while (x1 != x2);
             }
@@ -120,7 +121,7 @@ void trace_line(Line* line){
                         dx = e * 2;
                         dy = dy * 2;
                         do {
-                            print_at_coos(x1, y1, "-");
+                            printAtCoos(x1, y1, "-");
                             e = e + dy;
                             if (e >= 0) {
                                 y1++; // Déplacement diagonal
@@ -136,7 +137,7 @@ void trace_line(Line* line){
                         dy = e * 2;
                         dx = dx * 2;
                         do {
-                            print_at_coos(x1, y1, "-");
+                            printAtCoos(x1, y1, "-");
                             e = e + dx;
                             if (e <= 0) {
                                 x1--;
@@ -155,7 +156,7 @@ void trace_line(Line* line){
                         dx = e * 2;
                         dy = dy * 2;
                         do {
-                            print_at_coos(x1, y1, "-");
+                            printAtCoos(x1, y1, "-");
                             e = e - dy;
                             if (e >= 0) {
                                 y1--; // Déplacement diagonal
@@ -171,7 +172,7 @@ void trace_line(Line* line){
                         dy = e * 2;
                         dx = dx * 2;
                         do {
-                            print_at_coos(x1, y1, "-");
+                            printAtCoos(x1, y1, "-");
                             e = e - dx;
                             if (e >= 0) {
                                 x1--;
@@ -185,7 +186,7 @@ void trace_line(Line* line){
                 // dy = 0 et dx < 0
                 // Vecteur horizontal vers la gauche
                 do {
-                    print_at_coos(x1, y1, "-");
+                    printAtCoos(x1, y1, "-");
                     x1--;
                 } while (x1 != x2);
             }
@@ -197,13 +198,13 @@ void trace_line(Line* line){
             if (dy > 0) {
                 // Vecteur vertical croissant
                 do {
-                    print_at_coos(x1, y1, "-");
+                    printAtCoos(x1, y1, "-");
                     y1++;
                 } while (y1 != y2);
             } else {
                 // Vecteur vertical décroissant
                 do {
-                    print_at_coos(x1, y1, "-");
+                    printAtCoos(x1, y1, "-");
                     y1--;
                 } while (y1 != y2);
             }

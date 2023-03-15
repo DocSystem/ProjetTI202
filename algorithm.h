@@ -4,7 +4,8 @@
 
 #ifndef PROJETTI202_ALGORITHM_H
 #define PROJETTI202_ALGORITHM_H
+#include "geometry.h"
 
-void trace_line(Line* line);
+void traceLine(Line* line);
 
 #endif //PROJETTI202_ALGORITHM_H

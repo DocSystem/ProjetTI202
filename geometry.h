@@ -40,4 +40,8 @@ Point* createPoint(int x, int y);
 void freePoint(Point* point);
 void printPoint(Point* point);
 
+Line* createLine(Point* p1, Point* p2);
+void freeLine(Line* line);
+void printLine(Line* line);
+
 #endif //PROJETTI202_GEOMETRY_H
