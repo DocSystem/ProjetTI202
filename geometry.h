@@ -23,8 +23,9 @@ typedef struct {
 } Circle;
 
 typedef struct {
-    Point* p1;
-    Point* p2;
+    Point* p;
+    int width;
+    int height;
 } Rectangle;
 
 typedef struct {
@@ -47,5 +48,10 @@ void printLine(Line* line);
 Circle* createCircle(Point* center, int radius);
 void freeCircle(Circle* circle);
 void printCircle(Circle* circle);
+
+Rectangle* createRectangle(Point* p, int width, int height);
+void freeRectangle(Rectangle* rectangle);
+void printRectangle(Rectangle* rectangle);
+
 
 #endif //PROJETTI202_GEOMETRY_H
