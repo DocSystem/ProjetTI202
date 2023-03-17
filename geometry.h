@@ -57,6 +57,8 @@ Square* createSquare(Point* p, int side);
 void freeSquare(Square* square);
 void printSquare(Square* square);
 
-
+Polygon* createPolygon(Point** points);
+void freePolygon(Polygon* polygon);
+void printPolygon(Polygon* polygon);
 
 #endif //PROJETTI202_GEOMETRY_H

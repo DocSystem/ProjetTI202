@@ -109,3 +109,29 @@ void printSquare(Square* square) {
     Rectangle* rectangle = createRectangle(square -> p, square -> side, square -> side);
     printRectangle(rectangle);
 }
+
+Polygon* createPolygon(Point** points) {
+    Polygon* polygon = malloc(sizeof(Polygon));
+    polygon -> points = points;
+    return polygon;
+}
+
+void freePolygon(Polygon* polygon) {
+    free(polygon);
+}
+
+void printPolygon(Polygon* polygon) {
+    int i;
+    // Initialization of the lines of the polygon
+    Line* line;
+    // Trace the lines of the polygon
+    for (i = 0; i < sizeof(polygon -> points) / sizeof(polygon -> points[0]) - 1; i++) {
+        line = createLine(polygon -> points[i], polygon -> points[i + 1]);
+        traceLine(line);
+        freeLine(line);
+    }
+    // Trace the last line of the polygon
+    line = createLine(polygon -> points[i], polygon -> points[0]);
+    traceLine(line);
+    freeLine(line);
+}
