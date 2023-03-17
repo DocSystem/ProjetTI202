@@ -27,6 +27,7 @@ Line* createLine(Point* p1, Point* p2) {
     Line* line = malloc(sizeof(Line));
     line -> p1 = p1;
     line -> p2 = p2;
+    return line;
 }
 
 void freeLine(Line* line){

@@ -212,3 +212,38 @@ void traceLine(Line* line){
     }
     // Le pixel final (x2, y2) n'est pas tracé
 }
+
+void traceCircle(Circle* circle) {
+    /* Cet algorithme est inspiré de celui présenté dans le cours de TI202
+     * Il vient de cette page : "https://fr.wikipedia.org/wiki/Algorithme_de_trac%C3%A9_de_cercle_d%27Andres"
+     * Il a été adapté pour fonctionner avec les coordonnées de la structure Circle
+     * et pour fonctionner avec la fonction printAtCoos() de utils.c
+     */
+    int x_center = circle -> center -> x;
+    int y_center = circle -> center -> y;
+    int r = circle -> radius;
+    int x, y, d;
+    x = 0;
+    y = r;
+    d = r - 1;
+    while(y >= x) {
+
+        // Tracé d'un pixel par octants
+        printAtCoos(x_center + x, y_center + y, "-");
+        printAtCoos(x_center + y, y_center + x, "-");
+        printAtCoos(x_center - x, y_center + y, "-");
+        printAtCoos(x_center - y, y_center + x, "-");
+        printAtCoos(x_center + x, y_center - y, "-");
+        printAtCoos(x_center + y, y_center - x, "-");
+        printAtCoos(x_center - x, y_center - y, "-");
+        printAtCoos(x_center - y, y_center - x, "-");
+
+        if (d >= 2 * x) {
+            d -= 2 * x++ - 1;
+        } else if (d < 2 * (r - y)) {
+            d += 2 * y-- - 1;
+        } else {
+            d += (y-- - x-- - 1);
+        }
+    }
+}

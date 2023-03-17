@@ -11,8 +11,9 @@ void showMenu(int menuId) {
 }
 
 int main() {
-    Point* p = createPoint(100, 200);
-    Point* p2 = createPoint(200, 300);
+    showWindowBox();
+    Point* p = createPoint(10, 2);
+    Point* p2 = createPoint(20, 3);
     Line* l = createLine(p, p2);
     printLine(l);
     freeLine(l);
