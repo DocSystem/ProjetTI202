@@ -53,5 +53,10 @@ Rectangle* createRectangle(Point* p, int width, int height);
 void freeRectangle(Rectangle* rectangle);
 void printRectangle(Rectangle* rectangle);
 
+Square* createSquare(Point* p, int side);
+void freeSquare(Square* square);
+void printSquare(Square* square);
+
+
 
 #endif //PROJETTI202_GEOMETRY_H

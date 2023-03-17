@@ -20,7 +20,7 @@ void freePoint(Point* point) {
 }
 
 void printPoint(Point* point) {
-    printf("%d, %d", point -> x, point -> y);
+    printAtCoos(point -> x, point -> y, "X");
 }
 
 Line* createLine(Point* p1, Point* p2) {
@@ -35,10 +35,6 @@ void freeLine(Line* line){
 }
 
 void printLine(Line* line) {
-    printf("Line: ");
-    printPoint(line -> p1);
-    printf(" - ");
-    printPoint(line -> p2);
     traceLine(line);
 }
 
@@ -54,9 +50,6 @@ void freeCircle(Circle* circle) {
 }
 
 void printCircle(Circle* circle) {
-    printf("Circle: ");
-    printPoint(circle -> center);
-    printf(" - %d", circle -> radius);
     traceCircle(circle);
 }
 
@@ -73,9 +66,6 @@ void freeRectangle(Rectangle* rectangle) {
 }
 
 void printRectangle(Rectangle* rectangle) {
-    printf("Rectangle: ");
-    printPoint(rectangle -> p);
-    printf(" - %d, %d", rectangle -> width, rectangle -> height);
     // Initialization of the 4 points of the rectangle
     Point* corner0 = createPoint(rectangle -> p -> x, rectangle -> p -> y);
     Point* corner1 = createPoint(rectangle -> p -> x + rectangle -> width, rectangle -> p -> y);
@@ -101,4 +91,21 @@ void printRectangle(Rectangle* rectangle) {
     freePoint(corner1);
     freePoint(corner2);
     freePoint(corner3);
+}
+
+Square* createSquare(Point* p, int side) {
+    Square* square = malloc(sizeof(Square));
+    square -> p = p;
+    square -> side = side;
+    return square;
+}
+
+void freeSquare(Square* square) {
+    free(square);
+}
+
+void printSquare(Square* square) {
+    // A square is a special rectangle
+    Rectangle* rectangle = createRectangle(square -> p, square -> side, square -> side);
+    printRectangle(rectangle);
 }
