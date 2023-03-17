@@ -7,5 +7,6 @@
 #include "geometry.h"
 
 void traceLine(Line* line);
+void traceCircle(Circle* circle);
 
 #endif //PROJETTI202_ALGORITHM_H

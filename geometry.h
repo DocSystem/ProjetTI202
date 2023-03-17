@@ -44,4 +44,8 @@ Line* createLine(Point* p1, Point* p2);
 void freeLine(Line* line);
 void printLine(Line* line);
 
+Circle* createCircle(Point* center, int radius);
+void freeCircle(Circle* circle);
+void printCircle(Circle* circle);
+
 #endif //PROJETTI202_GEOMETRY_H

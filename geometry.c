@@ -41,3 +41,21 @@ void printLine(Line* line) {
     printPoint(line -> p2);
     traceLine(line);
 }
+
+Circle* createCircle(Point* center, int radius) {
+    Circle* circle = malloc(sizeof(Circle));
+    circle -> center = center;
+    circle -> radius = radius;
+    return circle;
+}
+
+void freeCircle(Circle* circle) {
+    free(circle);
+}
+
+void printCircle(Circle* circle) {
+    printf("Circle: ");
+    printPoint(circle -> center);
+    printf(" - %d", circle -> radius);
+    traceCircle(circle);
+}
