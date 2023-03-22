@@ -19,5 +19,6 @@ int main() {
     freeLine(l);
     // clearScreen();
     // sleep(5);
+    scanf("%s");
     return 0;
 }

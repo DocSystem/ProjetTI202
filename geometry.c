@@ -135,3 +135,102 @@ void printPolygon(Polygon* polygon) {
     traceLine(line);
     freeLine(line);
 }
+
+Shape* createEmptyShape(ShapeType type) {
+    Shape* shape = malloc(sizeof(Shape));
+    // Valeur par défault
+    shape -> ptrShape = NULL;
+    shape -> id = -1;
+    // Type de la forme qui sera stockée
+    shape -> type = type;
+    return shape;
+}
+
+Shape* createPointShape(int x, int y) {
+    Shape* shape = createEmptyShape(POINT);
+    Point* point = createPoint(x, y);
+    shape -> ptrShape = point;
+    return shape;
+}
+
+Shape* createLineShape(Point* p1, Point* p2) {
+    Shape* shape = createEmptyShape(LINE);
+    Line* line = createLine(p1, p2);
+    shape -> ptrShape = line;
+    return shape;
+}
+
+Shape* createCircleShape(Point* center, int radius) {
+    Shape* shape = createEmptyShape(CIRCLE);
+    Circle* circle = createCircle(center, radius);
+    shape -> ptrShape = circle;
+    return shape;
+}
+
+Shape* createRectangleShape(Point* p, int width, int height) {
+    Shape* shape = createEmptyShape(RECTANGLE);
+    Rectangle* rectangle = createRectangle(p, width, height);
+    shape -> ptrShape = rectangle;
+    return shape;
+}
+
+Shape* createSquareShape(Point* p, int side) {
+    Shape* shape = createEmptyShape(SQUARE);
+    Square* square = createSquare(p, side);
+    shape -> ptrShape = square;
+    return shape;
+}
+
+Shape* createPolygonShape(Point** points) {
+    Shape* shape = createEmptyShape(POLYGON);
+    Polygon* polygon = createPolygon(points);
+    shape -> ptrShape = polygon;
+    return shape;
+}
+
+void freeShape(Shape* shape) {
+    switch (shape -> type) {
+        case POINT:
+            freePoint(shape -> ptrShape);
+            break;
+        case LINE:
+            freeLine(shape -> ptrShape);
+            break;
+        case CIRCLE:
+            freeCircle(shape -> ptrShape);
+            break;
+        case RECTANGLE:
+            freeRectangle(shape -> ptrShape);
+            break;
+        case SQUARE:
+            freeSquare(shape -> ptrShape);
+            break;
+        case POLYGON:
+            freePolygon(shape -> ptrShape);
+            break;
+    }
+    free(shape);
+}
+
+void printShape(Shape* shape) {
+    switch (shape -> type) {
+        case POINT:
+            printPoint(shape -> ptrShape);
+            break;
+        case LINE:
+            printLine(shape -> ptrShape);
+            break;
+        case CIRCLE:
+            printCircle(shape -> ptrShape);
+            break;
+        case RECTANGLE:
+            printRectangle(shape -> ptrShape);
+            break;
+        case SQUARE:
+            printSquare(shape -> ptrShape);
+            break;
+        case POLYGON:
+            printPolygon(shape -> ptrShape);
+            break;
+    }
+}

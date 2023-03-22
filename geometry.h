@@ -61,4 +61,30 @@ Polygon* createPolygon(Point** points);
 void freePolygon(Polygon* polygon);
 void printPolygon(Polygon* polygon);
 
+typedef enum {
+    POINT,
+    LINE,
+    CIRCLE,
+    RECTANGLE,
+    SQUARE,
+    POLYGON
+} ShapeType;
+
+typedef struct {
+    ShapeType type;
+    int id;
+    void* ptrShape;
+} Shape;
+
+Shape* createEmptyShape(ShapeType type);
+Shape* createPointShape(int x, int y);
+Shape* createLineShape(Point* p1, Point* p2);
+Shape* createCircleShape(Point* center, int radius);
+Shape* createRectangleShape(Point* p, int width, int height);
+Shape* createSquareShape(Point* p, int side);
+Shape* createPolygonShape(Point** points);
+void freeShape(Shape* shape);
+void printShape(Shape* shape);
+
+
 #endif //PROJETTI202_GEOMETRY_H
