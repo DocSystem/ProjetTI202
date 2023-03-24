@@ -20,6 +20,10 @@ void freePoint(Point* point) {
 }
 
 void printPoint(Point* point) {
+    printf("Point (%d, %d)\n", point -> x, point -> y);
+}
+
+void drawPoint(Point* point) {
     printAtCoos(point -> x, point -> y, "X");
 }
 
@@ -35,6 +39,10 @@ void freeLine(Line* line){
 }
 
 void printLine(Line* line) {
+    printf("Line (%d, %d) -> (%d, %d)\n", line -> p1 -> x, line -> p1 -> y, line -> p2 -> x, line -> p2 -> y);
+}
+
+void drawLine(Line* line) {
     traceLine(line);
 }
 
@@ -50,6 +58,10 @@ void freeCircle(Circle* circle) {
 }
 
 void printCircle(Circle* circle) {
+    printf("Circle (%d, %d) with radius %d\n", circle -> center -> x, circle -> center -> y, circle -> radius);
+}
+
+void drawCircle(Circle* circle) {
     traceCircle(circle);
 }
 
@@ -66,6 +78,10 @@ void freeRectangle(Rectangle* rectangle) {
 }
 
 void printRectangle(Rectangle* rectangle) {
+    printf("Rectangle (%d, %d) with width %d and height %d\n", rectangle -> p -> x, rectangle -> p -> y, rectangle -> width, rectangle -> height);
+}
+
+void drawRectangle(Rectangle* rectangle) {
     // Initialization of the 4 points of the rectangle
     Point* corner0 = createPoint(rectangle -> p -> x, rectangle -> p -> y);
     Point* corner1 = createPoint(rectangle -> p -> x + rectangle -> width, rectangle -> p -> y);
@@ -105,14 +121,19 @@ void freeSquare(Square* square) {
 }
 
 void printSquare(Square* square) {
+    printf("Square (%d, %d) with side %d\n", square -> p -> x, square -> p -> y, square -> side);
+}
+
+void drawSquare(Square* square) {
     // A square is a special rectangle
     Rectangle* rectangle = createRectangle(square -> p, square -> side, square -> side);
     printRectangle(rectangle);
 }
 
-Polygon* createPolygon(Point** points) {
+Polygon* createPolygon(Point** points, int nbPoints) {
     Polygon* polygon = malloc(sizeof(Polygon));
     polygon -> points = points;
+    polygon -> nbPoints = nbPoints;
     return polygon;
 }
 
@@ -121,6 +142,13 @@ void freePolygon(Polygon* polygon) {
 }
 
 void printPolygon(Polygon* polygon) {
+    printf("Polygon with %d points\n", polygon -> nbPoints);
+    for (int i = 0; i < polygon -> nbPoints; i++) {
+        printPoint(polygon -> points[i]);
+    }
+}
+
+void drawPolygon(Polygon* polygon) {
     int i;
     // Initialization of the lines of the polygon
     Line* line;
@@ -183,7 +211,7 @@ Shape* createSquareShape(Point* p, int side) {
 
 Shape* createPolygonShape(Point** points) {
     Shape* shape = createEmptyShape(POLYGON);
-    Polygon* polygon = createPolygon(points);
+    Polygon* polygon = createPolygon(points, sizeof(points) / sizeof(points[0]));
     shape -> ptrShape = polygon;
     return shape;
 }
@@ -231,6 +259,29 @@ void printShape(Shape* shape) {
             break;
         case POLYGON:
             printPolygon(shape -> ptrShape);
+            break;
+    }
+}
+
+void drawShape(Shape* shape) {
+    switch (shape -> type) {
+        case POINT:
+            drawPoint(shape -> ptrShape);
+            break;
+        case LINE:
+            drawLine(shape -> ptrShape);
+            break;
+        case CIRCLE:
+            drawCircle(shape -> ptrShape);
+            break;
+        case RECTANGLE:
+            drawRectangle(shape -> ptrShape);
+            break;
+        case SQUARE:
+            drawSquare(shape -> ptrShape);
+            break;
+        case POLYGON:
+            drawPolygon(shape -> ptrShape);
             break;
     }
 }

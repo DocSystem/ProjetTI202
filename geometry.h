@@ -34,32 +34,39 @@ typedef struct {
 } Square;
 
 typedef struct {
+    int nbPoints;
     Point** points;
 } Polygon;
 
 Point* createPoint(int x, int y);
 void freePoint(Point* point);
 void printPoint(Point* point);
+void drawPoint(Point* point);
 
 Line* createLine(Point* p1, Point* p2);
 void freeLine(Line* line);
 void printLine(Line* line);
+void drawLine(Line* line);
 
 Circle* createCircle(Point* center, int radius);
 void freeCircle(Circle* circle);
 void printCircle(Circle* circle);
+void drawCircle(Circle* circle);
 
 Rectangle* createRectangle(Point* p, int width, int height);
 void freeRectangle(Rectangle* rectangle);
 void printRectangle(Rectangle* rectangle);
+void drawRectangle(Rectangle* rectangle);
 
 Square* createSquare(Point* p, int side);
 void freeSquare(Square* square);
 void printSquare(Square* square);
+void drawSquare(Square* square);
 
-Polygon* createPolygon(Point** points);
+Polygon* createPolygon(Point** points, int nbPoints);
 void freePolygon(Polygon* polygon);
 void printPolygon(Polygon* polygon);
+void drawPolygon(Polygon* polygon);
 
 typedef enum {
     POINT,
@@ -85,6 +92,7 @@ Shape* createSquareShape(Point* p, int side);
 Shape* createPolygonShape(Point** points);
 void freeShape(Shape* shape);
 void printShape(Shape* shape);
+void drawShape(Shape* shape);
 
 
 #endif //PROJETTI202_GEOMETRY_H
