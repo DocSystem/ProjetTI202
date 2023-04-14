@@ -20,10 +20,10 @@ int main() {
 
     Maillon* ShapeList = NULL;
 
-    ActionChoice(&ShapeList);
-    ActionChoice(&ShapeList);
+    int choice = -100;
+    while (choice != -99) {
+        choice = ActionChoice(&ShapeList);
+    }
 
-    int end;
-    scanf("%d", &end);
     return 0;
 }

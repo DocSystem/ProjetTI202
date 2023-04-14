@@ -209,9 +209,9 @@ Shape* createSquareShape(Point* p, int side) {
     return shape;
 }
 
-Shape* createPolygonShape(Point** points) {
+Shape* createPolygonShape(Point** points, int nbPoints) {
     Shape* shape = createEmptyShape(POLYGON);
-    Polygon* polygon = createPolygon(points, sizeof(points) / sizeof(points[0]));
+    Polygon* polygon = createPolygon(points, nbPoints);
     shape -> ptrShape = polygon;
     return shape;
 }

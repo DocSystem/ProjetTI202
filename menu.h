@@ -8,7 +8,7 @@
 #include "geometry.h"
 #include "chained_list.h"
 
-void ActionChoice(Maillon** head);
+int ActionChoice(Maillon** head);
 Shape* ShapeChoice();
 
 #endif //PROJETTI202_MENU_H

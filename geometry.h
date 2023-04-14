@@ -89,7 +89,7 @@ Shape* createLineShape(Point* p1, Point* p2);
 Shape* createCircleShape(Point* center, int radius);
 Shape* createRectangleShape(Point* p, int width, int height);
 Shape* createSquareShape(Point* p, int side);
-Shape* createPolygonShape(Point** points);
+Shape* createPolygonShape(Point** points, int nbPoints);
 void freeShape(Shape* shape);
 void printShape(Shape* shape);
 void drawShape(Shape* shape);

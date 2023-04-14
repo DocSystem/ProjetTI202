@@ -10,7 +10,7 @@
 #include "chained_list.h"
 
 
-void ActionChoice(Maillon** head) {
+int ActionChoice(Maillon** head) {
     printf("Veuillez choisir une action : \n");
     printf("A- Ajouter une forme \n");
     printf("B- Afficher la liste des formes \n");
@@ -21,30 +21,37 @@ void ActionChoice(Maillon** head) {
     char choice;
     scanf(" %c", &choice);
     switch (choice) {
-        case 'A':
+        case 'A': {
             printf("Vous avez choisi d'ajouter une forme \n");
-            Shape* shape = ShapeChoice();
+            Shape *shape = ShapeChoice();
             *head = addMaillon(*head, shape);
-            break;
-        case 'B':
+            return 0;
+        }
+        case 'B': {
             printf("Vous avez choisi d'afficher la liste des formes \n");
             printList(*head);
-            break;
-        case 'C':
+            return 1;
+        }
+        case 'C': {
             printf("Vous avez choisi de supprimer une forme \n");
-            break;
-        case 'D':
+            return 2;
+        }
+        case 'D': {
             printf("Vous avez choisi de tracer le dessin \n");
-            break;
-        case 'E':
+            return 3;
+        }
+        case 'E': {
             printf("Vous avez choisi d'afficher l'aide \n");
-            break;
-        case 'F':
+            return 4;
+        }
+        case 'F': {
             printf("Vous avez choisi de quitter \n");
-            break;
-        default:
+            return -99;
+        }
+        default: {
             printf("Vous n'avez pas choisi une action valide \n");
-            break;
+            return -1;
+        }
 
     }
 }
@@ -159,7 +166,7 @@ Shape* ShapeChoice() {
                 scanf(" %d", &y);
                 points[i] = createPoint(x, y);
             }
-            Shape *polygon = createPolygonShape(points);
+            Shape *polygon = createPolygonShape(points, nbPoints);
             return polygon;
         }
         case 7:
@@ -168,7 +175,7 @@ Shape* ShapeChoice() {
 
         default: {
             printf("Vous n'avez pas choisi une forme valide \n");
-            return ShapeChoice()
+            return ShapeChoice();
         }
     }
 }
