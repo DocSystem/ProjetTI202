@@ -5,7 +5,10 @@
 #ifndef PROJETTI202_MENU_H
 #define PROJETTI202_MENU_H
 
-void ActionChoice();
-void ShapeChoice();
+#include "geometry.h"
+#include "chained_list.h"
+
+void ActionChoice(Maillon** head);
+Shape* ShapeChoice();
 
 #endif //PROJETTI202_MENU_H

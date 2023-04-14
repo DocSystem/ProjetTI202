@@ -1,17 +1,12 @@
 #include <stdio.h>
-#include "utils.h"
+
+#include "menu.h"
 #include "geometry.h"
-
-void showMenu(int menuId) {
-    if (menuId == 0) {
-        // Main menu
-        // clearScreen();
-
-    }
-}
+#include "utils.h"
+#include "chained_list.h"
 
 int main() {
-    showWindowBox();
+    /*showWindowBox();
     Point* p = createPoint(10, 2);
     Point* p2 = createPoint(20, 3);
     Line* l = createLine(p, p2);
@@ -20,5 +15,15 @@ int main() {
     // clearScreen();
     // sleep(5);
     scanf("%s");
+    */
+    //showWindowBox();
+
+    Maillon* ShapeList = NULL;
+
+    ActionChoice(&ShapeList);
+    ActionChoice(&ShapeList);
+
+    int end;
+    scanf("%d", &end);
     return 0;
 }

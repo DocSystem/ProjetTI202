@@ -168,7 +168,7 @@ Shape* createEmptyShape(ShapeType type) {
     Shape* shape = malloc(sizeof(Shape));
     // Valeur par défault
     shape -> ptrShape = NULL;
-    shape -> id = -1;
+    shape -> id = -1; // Il manque encore la fonction GetNextId()
     // Type de la forme qui sera stockée
     shape -> type = type;
     return shape;
@@ -177,7 +177,7 @@ Shape* createEmptyShape(ShapeType type) {
 Shape* createPointShape(int x, int y) {
     Shape* shape = createEmptyShape(POINT);
     Point* point = createPoint(x, y);
-    shape -> ptrShape = point;
+    shape -> ptrShape = (Point*) point;
     return shape;
 }
 
