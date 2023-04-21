@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "geometry.h"
+
 Maillon* createMaillon(Shape* shape) {
     Maillon* maillon = malloc(sizeof(Maillon));
     maillon->shape = shape;

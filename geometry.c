@@ -6,6 +6,7 @@
 #include "geometry.h"
 #include "utils.h"
 #include "algorithm.h"
+#include "id.h"
 
 
 Point* createPoint(int x, int y) {
@@ -168,7 +169,7 @@ Shape* createEmptyShape(ShapeType type) {
     Shape* shape = malloc(sizeof(Shape));
     // Valeur par défault
     shape -> ptrShape = NULL;
-    shape -> id = -1; // Il manque encore la fonction GetNextId()
+    shape -> id = get_next_id();
     // Type de la forme qui sera stockée
     shape -> type = type;
     return shape;
