@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  BUILD_TYPE: Release
-
 jobs:
   build:
     # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
@@ -22,11 +18,11 @@ jobs:
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}} --config ${{env.BUILD_TYPE}}
+      run: gcc -o ProjetTI202 main.c
 
-    - name: Test
-      working-directory: ${{github.workspace}}
-      # Execute tests defined by the CMake configuration.
-      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: ctest -C ${{env.BUILD_TYPE}}
-
+    - name: Publish
+      # Upload the build artifact for later use as a release asset
+      uses: actions/upload-artifact@v2
+      with:
+          name: ProjetTI202
+          path: ProjetTI202
