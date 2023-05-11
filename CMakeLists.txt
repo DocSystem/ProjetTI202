@@ -18,4 +18,8 @@ add_executable(ProjetTI202
         menu.c
         menu.h
         utils.c
-        utils.h keyboard.c keyboard.h id.c)
+        utils.h
+        keyboard.c
+        keyboard.h
+        id.c
+        id.h)
