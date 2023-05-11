@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <time.h>
+#include <sys/ioctl.h>
 #include "utils.h"
 
 void sleep(int seconds) {
@@ -23,8 +24,10 @@ void printAtCoos(int x, int y, char *str) {
 
 win_size getWindowSize() {
     win_size size;
-    size.width = 80;
-    size.height = 24;
+    struct winsize w;
+    ioctl(0, TIOCGWINSZ, &w);
+    size.width = w.ws_col;
+    size.height = w.ws_row;
     return size;
 }
 
@@ -45,4 +48,10 @@ void showWindowBox() {
         printf("-");
     }
     printf("\n");
+}
+
+int main() {
+    win_size size = getWindowSize();
+    printf("Width: %d\nHeight: %d\n", size.width, size.height);
+    return 0;
 }
