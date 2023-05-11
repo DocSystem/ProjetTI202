@@ -73,9 +73,3 @@ void showWindowBox() {
     }
     printf("\n");
 }
-
-int main() {
-    win_size size = getWindowSize();
-    printf("Width: %d\nHeight: %d\n", size.width, size.height);
-    return 0;
-}

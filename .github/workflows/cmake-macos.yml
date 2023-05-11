@@ -18,7 +18,7 @@ jobs:
 
       - name: Build
         # Build your program with the given configuration
-        run: gcc -o ProjetTI202 main.c
+        run: cmake . && make
 
       - name: Publish
         # Upload the build artifact for later use as a release asset
