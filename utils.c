@@ -4,7 +4,11 @@
 
 #include <stdio.h>
 #include <time.h>
+#if defined(__unix__) || defined(__APPLE__)
 #include <sys/ioctl.h>
+#elif defined(_WIN32) || defined(WIN32)
+#include <windows.h>
+#endif
 #include "utils.h"
 
 void sleep(int seconds) {
@@ -22,6 +26,7 @@ void printAtCoos(int x, int y, char *str) {
     printf("\033[%d;%dH%s", y, x, str);
 }
 
+#if defined(__unix__) || defined(__APPLE__)
 win_size getWindowSize() {
     win_size size;
     struct winsize w;
@@ -30,6 +35,23 @@ win_size getWindowSize() {
     size.height = w.ws_row;
     return size;
 }
+#elif defined(_WIN32) || defined(WIN32)
+win_size getWindowSize() {
+    win_size size;
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    size.width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+    size.height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+    return size;
+}
+#else
+win_size getWindowSize() {
+    win_size size;
+    size.width = 0;
+    size.height = 0;
+    return size;
+}
+#endif
 
 void showWindowBox() {
     win_size size = getWindowSize();
