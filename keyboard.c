@@ -53,4 +53,8 @@ int waitForKey() {
     return 0;
 }
 
+#else
+
+#error "Unsupported platform"
+
 #endif
