@@ -8,6 +8,8 @@
 #include <sys/ioctl.h>
 #elif defined(_WIN32) || defined(WIN32)
 #include <windows.h>
+#else
+#error "OS not supported"
 #endif
 #include "utils.h"
 
