@@ -18,7 +18,7 @@ jobs:
 
       - name: Build
         # Build your program with the given configuration
-        run: cmake . && make
+        run: make
 
       - name: Publish
         # Upload the build artifact for later use as a release asset
