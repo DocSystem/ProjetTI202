@@ -5,6 +5,6 @@
 #ifndef PROJETTI202_KEYBOARD_H
 #define PROJETTI202_KEYBOARD_H
 
-int waitForKey();
+char* waitForKey();
 
 #endif //PROJETTI202_KEYBOARD_H

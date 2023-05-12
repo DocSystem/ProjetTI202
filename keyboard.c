@@ -5,9 +5,10 @@
 #if __linux__ || __APPLE__
 
 #include <curses.h>
+#include <stdlib.h>
 #include "keyboard.h"
 
-int waitForKey() {
+char* waitForKey() {
     int ch;
 
     /* Curses Initialisations */
@@ -15,19 +16,45 @@ int waitForKey() {
     keypad(stdscr, TRUE);       /* enable KEY_UP/KEY_DOWN/KEY_RIGHT/KEY_LEFT */
     noecho();                   /* prevent displaying if other keys */
 
-    while ((ch = getch()) != KEY_ENTER) {
+    while (1) {
+        ch = getch();
+        // printf("%d\r\n", ch);
         if (ch == KEY_UP) {
-            return 1;
+            return "up";
         } else if (ch == KEY_DOWN) {
-            return 2;
+            return "down";
         } else if (ch == KEY_LEFT) {
-            return 3;
+            return "left";
         } else if (ch == KEY_RIGHT) {
-            return 4;
+            return "right";
+        } else if (ch >= 97 && ch <= 122) {
+            char* str = malloc(sizeof(char) * 2);
+            str[0] = ch;
+            str[1] = '\0';
+            return str;
+        } else if (ch >= 65 && ch <= 90) {
+            char* str = malloc(sizeof(char) * 2);
+            str[0] = ch;
+            str[1] = '\0';
+            return str;
+        } else if (ch >= 48 && ch <= 57) {
+            char* str = malloc(sizeof(char) * 2);
+            str[0] = ch;
+            str[1] = '\0';
+            return str;
+        } else if (ch == 32) {
+            return "space";
+        } else if (ch == 9) {
+            return "tab";
+        } else if (ch == 127) {
+            return "backspace";
+        } else if (ch == 10) {
+            return "enter";
+        } else if (ch == 27) {
+            return "escape";
         }
     }
-
-    return 0;
+    return "ERROR";
 }
 
 #elif _WIN32
@@ -35,18 +62,45 @@ int waitForKey() {
 #include <conio.h>
 #include "keyboard.h"
 
-int waitForKey() {
+char* waitForKey() {
     int ch;
 
-    while ((ch = getch()) != 13) {
+    while (1) {
+        ch = getch();
+        // printf("%d\r\n", ch);
         if (ch == 72) {
-            return 1;
+            return "up";
         } else if (ch == 80) {
-            return 2;
+            return "down";
         } else if (ch == 75) {
-            return 3;
+            return "left";
         } else if (ch == 77) {
-            return 4;
+            return "right";
+        } else if (ch >= 97 && ch <= 122) {
+            char* str = malloc(sizeof(char) * 2);
+            str[0] = ch;
+            str[1] = '\0';
+            return str;
+        } else if (ch >= 65 && ch <= 90) {
+            char* str = malloc(sizeof(char) * 2);
+            str[0] = ch;
+            str[1] = '\0';
+            return str;
+        } else if (ch >= 48 && ch <= 57) {
+            char* str = malloc(sizeof(char) * 2);
+            str[0] = ch;
+            str[1] = '\0';
+            return str;
+        } else if (ch == 32) {
+            return "space";
+        } else if (ch == 9) {
+            return "tab";
+        } else if (ch == 8) {
+            return "backspace";
+        } else if (ch == 13) {
+            return "enter";
+        } else if (ch == 27) {
+            return "escape";
         }
     }
 

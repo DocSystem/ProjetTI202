@@ -4,6 +4,7 @@
 #include "geometry.h"
 #include "utils.h"
 #include "chained_list.h"
+#include "gui.h"
 
 int main() {
     /*showWindowBox();
@@ -18,12 +19,14 @@ int main() {
     */
     //showWindowBox();
 
-    Maillon* ShapeList = NULL;
+    /*Maillon* ShapeList = NULL;
 
     int choice = -100;
     while (choice != -99) {
         choice = ActionChoice(&ShapeList);
-    }
+    }*/
+
+    runEditor();
 
     return 0;
 }
