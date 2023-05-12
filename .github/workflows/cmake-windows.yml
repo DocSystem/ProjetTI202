@@ -22,9 +22,6 @@ jobs:
       - name: Build project
         run: cmake --build . --config Release
 
-      - name: What the fuck is going on
-        run: dir Release
-
       - name: Publish
         # Upload the build artifact for later use as a release asset
         uses: actions/upload-artifact@v2
