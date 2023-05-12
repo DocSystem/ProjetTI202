@@ -23,11 +23,11 @@ jobs:
         run: cmake --build . --config Release
 
       - name: What the fuck is going on
-        run: dir /s
+        run: dir
 
       - name: Publish
         # Upload the build artifact for later use as a release asset
         uses: actions/upload-artifact@v2
         with:
           name: ProjetTI202
-          path: ProjetTI202
+          path: ProjetTI202.exe
