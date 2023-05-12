@@ -3,7 +3,9 @@ project(ProjetTI202 C)
 
 set(CMAKE_C_STANDARD 23)
 
-# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lcurses -ocurses-test")
+if(APPLE)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lcurses -lncurses")
+endif(APPLE)
 
 include_directories(.)
 
