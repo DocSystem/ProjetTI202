@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Run cmake
+        run: cmake .
+
       - name: Build project
         run: cmake --build . --config Release
 
