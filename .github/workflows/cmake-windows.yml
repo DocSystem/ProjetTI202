@@ -19,11 +19,8 @@ jobs:
       - name: Run cmake
         run: cmake .
 
-      - name: List files
-        run: dir
-
-      - name: Build
-        run: make
+      - name: Build Visual Studio solution
+        run: msbuild /p:Configuration=Release /p:Platform=x64 /m /nologo /verbosity:normal /clp:Summary /p:OutDir=build
 
       - name: Publish
         # Upload the build artifact for later use as a release asset
