@@ -8,7 +8,7 @@ if(APPLE)
 endif(APPLE)
 
 if(UNIX AND NOT APPLE)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lcurses -lncurses -ltinfo")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lcurses -ltinfo")
 endif(UNIX AND NOT APPLE)
 
 include_directories(.)
