@@ -3,7 +3,7 @@ project(ProjetTI202 C)
 
 set(CMAKE_C_STANDARD 23)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lcurses -ocurses-test")
+# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lcurses -ocurses-test")
 
 include_directories(.)
 
