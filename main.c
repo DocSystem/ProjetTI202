@@ -4,7 +4,7 @@
 #include "geometry.h"
 #include "utils.h"
 #include "chained_list.h"
-#include "area.h"
+#include "gui.h"
 
 int main() {
     /*showWindowBox();
@@ -19,18 +19,14 @@ int main() {
     */
     //showWindowBox();
 
-    Maillon* ShapeList = NULL;
-
-    while (1) {
-        Area* a = create_area(10, 10);
-        add_shape_to_area(a, createPointShape(1, 1));
-        delete_area(a);
-    }
+    /*Maillon* ShapeList = NULL;
 
     int choice = -100;
     while (choice != -99) {
         choice = ActionChoice(&ShapeList);
-    }
+    }*/
+
+    runEditor();
 
     return 0;
 }
