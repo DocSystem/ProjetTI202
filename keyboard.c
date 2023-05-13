@@ -2,11 +2,12 @@
 // Created by Antoine Souben-Fink on 14/04/2023.
 //
 
+#include <stdlib.h>
+#include "keyboard.h"
+
 #if __linux__ || __APPLE__
 
 #include <curses.h>
-#include <stdlib.h>
-#include "keyboard.h"
 
 char* waitForKey() {
     int ch;
@@ -60,7 +61,6 @@ char* waitForKey() {
 #elif _WIN32
 
 #include <conio.h>
-#include "keyboard.h"
 
 char* waitForKey() {
     int ch;
