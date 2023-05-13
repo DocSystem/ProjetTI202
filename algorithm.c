@@ -7,11 +7,11 @@
 #include "geometry.h"
 
 
-void traceLine(Line* line){
+void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
     /* Cet algorithme est inspiré de celui présenté dans le cours de TI202
      * Il vient de cette page : "https://fr.wikipedia.org/wiki/Algorithme_de_trac%C3%A9_de_segment_de_Bresenham"
      * Il a été adapté pour fonctionner avec les coordonnées de la structure Line
-     * et pour fonctionner avec la fonction printAtCoos() de utils.c
+     * et pour fonctionner avec la fonction addPixel() de geometry.c
      */
     // Déclaration des variables
     int dx, dy;
@@ -40,7 +40,7 @@ void traceLine(Line* line){
                         dx = e * 2;
                         dy = dy * 2;
                         do {
-                            printAtCoos(x1, y1, "-");
+                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
                             e = e - dy;
                             if (e < 0) {
                                 y1++; // Déplacement diagonal
@@ -56,7 +56,7 @@ void traceLine(Line* line){
                         dy = e * 2;
                         dx = dx * 2;
                         do {
-                            printAtCoos(x1, y1, "-");
+                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
                             e = e - dx;
                             if (e < 0) {
                                 x1++; // Déplacement diagonal
@@ -75,7 +75,7 @@ void traceLine(Line* line){
                         dx = e * 2;
                         dy = dy * 2;
                         do {
-                            printAtCoos(x1, y1, "-");
+                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
                             e = e + dy;
                             if (e < 0) {
                                 y1--;
@@ -91,7 +91,7 @@ void traceLine(Line* line){
                         dy = e * 2;
                         dx = dx * 2;
                         do {
-                            printAtCoos(x1, y1, "-");
+                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
                             e = e + dx;
                             if (e > 0) {
                                 x1++;
@@ -104,7 +104,7 @@ void traceLine(Line* line){
             } else {
                 // Vecteur horizontal vers la droite
                 do {
-                    printAtCoos(x1, y1, "-");
+                    addPixel(pixel, nb_pixels, createPixel(x1, y1));
                     x1++;
                 } while (x1 != x2);
             }
@@ -121,7 +121,7 @@ void traceLine(Line* line){
                         dx = e * 2;
                         dy = dy * 2;
                         do {
-                            printAtCoos(x1, y1, "-");
+                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
                             e = e + dy;
                             if (e >= 0) {
                                 y1++; // Déplacement diagonal
@@ -137,7 +137,7 @@ void traceLine(Line* line){
                         dy = e * 2;
                         dx = dx * 2;
                         do {
-                            printAtCoos(x1, y1, "-");
+                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
                             e = e + dx;
                             if (e <= 0) {
                                 x1--;
@@ -156,7 +156,7 @@ void traceLine(Line* line){
                         dx = e * 2;
                         dy = dy * 2;
                         do {
-                            printAtCoos(x1, y1, "-");
+                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
                             e = e - dy;
                             if (e >= 0) {
                                 y1--; // Déplacement diagonal
@@ -172,7 +172,7 @@ void traceLine(Line* line){
                         dy = e * 2;
                         dx = dx * 2;
                         do {
-                            printAtCoos(x1, y1, "-");
+                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
                             e = e - dx;
                             if (e >= 0) {
                                 x1--;
@@ -186,7 +186,7 @@ void traceLine(Line* line){
                 // dy = 0 et dx < 0
                 // Vecteur horizontal vers la gauche
                 do {
-                    printAtCoos(x1, y1, "-");
+                    addPixel(pixel, nb_pixels, createPixel(x1, y1));
                     x1--;
                 } while (x1 != x2);
             }
@@ -198,13 +198,13 @@ void traceLine(Line* line){
             if (dy > 0) {
                 // Vecteur vertical croissant
                 do {
-                    printAtCoos(x1, y1, "-");
+                    addPixel(pixel, nb_pixels, createPixel(x1, y1));
                     y1++;
                 } while (y1 != y2);
             } else {
                 // Vecteur vertical décroissant
                 do {
-                    printAtCoos(x1, y1, "-");
+                    addPixel(pixel, nb_pixels, createPixel(x1, y1));
                     y1--;
                 } while (y1 != y2);
             }
@@ -213,11 +213,11 @@ void traceLine(Line* line){
     // Le pixel final (x2, y2) n'est pas tracé
 }
 
-void traceCircle(Circle* circle) {
+void traceCircle(Circle* circle, Pixel** pixel, int* nb_pixels) {
     /* Cet algorithme est inspiré de celui présenté dans le cours de TI202
      * Il vient de cette page : "https://fr.wikipedia.org/wiki/Algorithme_de_trac%C3%A9_de_cercle_d%27Andres"
      * Il a été adapté pour fonctionner avec les coordonnées de la structure Circle
-     * et pour fonctionner avec la fonction printAtCoos() de utils.c
+     * et pour fonctionner avec la fonction addPixel de geometry.c
      */
     int x_center = circle -> center -> x;
     int y_center = circle -> center -> y;
@@ -229,14 +229,14 @@ void traceCircle(Circle* circle) {
     while(y >= x) {
 
         // Tracé d'un pixel par octants
-        printAtCoos(x_center + x, y_center + y, "-");
-        printAtCoos(x_center + y, y_center + x, "-");
-        printAtCoos(x_center - x, y_center + y, "-");
-        printAtCoos(x_center - y, y_center + x, "-");
-        printAtCoos(x_center + x, y_center - y, "-");
-        printAtCoos(x_center + y, y_center - x, "-");
-        printAtCoos(x_center - x, y_center - y, "-");
-        printAtCoos(x_center - y, y_center - x, "-");
+        addPixel(pixel, nb_pixels, createPixel(x_center + x, y_center + y));
+        addPixel(pixel, nb_pixels, createPixel(x_center + y, y_center + x));
+        addPixel(pixel, nb_pixels, createPixel(x_center - x, y_center + y));
+        addPixel(pixel, nb_pixels, createPixel(x_center - y, y_center + x));
+        addPixel(pixel, nb_pixels, createPixel(x_center + x, y_center - y));
+        addPixel(pixel, nb_pixels, createPixel(x_center + y, y_center - x));
+        addPixel(pixel, nb_pixels, createPixel(x_center - x, y_center - y));
+        addPixel(pixel, nb_pixels, createPixel(x_center - y, y_center - x));
 
         if (d >= 2 * x) {
             d -= 2 * x++ - 1;

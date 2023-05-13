@@ -30,7 +30,7 @@ add_executable(ProjetTI202
         keyboard.c
         keyboard.h
         id.c
-        id.h gui.c gui.h)
+        id.h gui.c gui.h area.c area.h)
 
 if(UNIX AND NOT APPLE)
     target_link_libraries(ProjetTI202 ${CURSES_LIBRARIES})

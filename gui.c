@@ -3,6 +3,7 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "gui.h"
 #include "geometry.h"
 #include "keyboard.h"
@@ -11,4 +12,6 @@
 void runEditor() {
     char* k = waitForKey();
     printf("%s\n", k);
+    free(k);
+    scanf("%s");
 }

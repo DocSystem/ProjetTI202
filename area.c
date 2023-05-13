@@ -3,6 +3,7 @@
 //
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "geometry.h"
 #include "area.h"
@@ -59,10 +60,29 @@ void delete_area(Area* area) {
 }
 
 void draw_area(Area* area) {
+    Pixel** pixels = malloc(sizeof(Pixel*));
+    int nb_pixels = 0;
     for (int i = 0; i < area->nb_shape; i++) {
-        Shape* shp = getMaillonById(area->shapes, i)->shape;
-        //Pixel** create_shape_to_pixel(Shape* shape)
-
+        Shape* shape = getMaillonByIndex(area->shapes, i)->shape;
+        drawShape(shape, pixels, &nb_pixels);
+    }
+    for (int i = 0; i < nb_pixels; ++i) {
+        Pixel* pixel = pixels[i];
+        area->mat[pixel->x][pixel->y] = 1;
     }
 }
 
+
+void print_area(Area* area) {
+    for (int i = 0; i < area->width; i++) {
+        for (int j = 0; j < area->height; j++) {
+            if (area->mat[i][j] == 0) {
+                printf(" ");
+                continue;
+            } else {
+                printf("X");
+            }
+        }
+        printf("\n");
+    }
+}

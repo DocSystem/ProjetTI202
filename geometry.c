@@ -24,9 +24,6 @@ void printPoint(Point* point) {
     printf("Point (%d, %d)\n", point -> x, point -> y);
 }
 
-void drawPoint(Point* point) {
-    printAtCoos(point -> x, point -> y, "X");
-}
 
 Line* createLine(Point* p1, Point* p2) {
     Line* line = malloc(sizeof(Line));
@@ -43,9 +40,7 @@ void printLine(Line* line) {
     printf("Line (%d, %d) -> (%d, %d)\n", line -> p1 -> x, line -> p1 -> y, line -> p2 -> x, line -> p2 -> y);
 }
 
-void drawLine(Line* line) {
-    traceLine(line);
-}
+
 
 Circle* createCircle(Point* center, int radius) {
     Circle* circle = malloc(sizeof(Circle));
@@ -62,9 +57,7 @@ void printCircle(Circle* circle) {
     printf("Circle (%d, %d) with radius %d\n", circle -> center -> x, circle -> center -> y, circle -> radius);
 }
 
-void drawCircle(Circle* circle) {
-    traceCircle(circle);
-}
+
 
 Rectangle* createRectangle(Point* p, int width, int height) {
     Rectangle* rectangle = malloc(sizeof(Rectangle));
@@ -82,33 +75,7 @@ void printRectangle(Rectangle* rectangle) {
     printf("Rectangle (%d, %d) with width %d and height %d\n", rectangle -> p -> x, rectangle -> p -> y, rectangle -> width, rectangle -> height);
 }
 
-void drawRectangle(Rectangle* rectangle) {
-    // Initialization of the 4 points of the rectangle
-    Point* corner0 = createPoint(rectangle -> p -> x, rectangle -> p -> y);
-    Point* corner1 = createPoint(rectangle -> p -> x + rectangle -> width, rectangle -> p -> y);
-    Point* corner2 = createPoint(rectangle -> p -> x + rectangle -> width, rectangle -> p -> y + rectangle -> height);
-    Point* corner3 = createPoint(rectangle -> p -> x, rectangle -> p -> y + rectangle -> height);
-    // Initialization of the 4 lines of the rectangle
-    Line* line0 = createLine(corner0, corner1);
-    Line* line1 = createLine(corner1, corner2);
-    Line* line2 = createLine(corner2, corner3);
-    Line* line3 = createLine(corner3, corner0);
-    // Trace the 4 lines of the rectangle
-    traceLine(line0);
-    traceLine(line1);
-    traceLine(line2);
-    traceLine(line3);
-    // Free the 4 lines of the rectangle from memory
-    freeLine(line0);
-    freeLine(line1);
-    freeLine(line2);
-    freeLine(line3);
-    // Free the 4 points of the rectangle from memory
-    freePoint(corner0);
-    freePoint(corner1);
-    freePoint(corner2);
-    freePoint(corner3);
-}
+
 
 Square* createSquare(Point* p, int side) {
     Square* square = malloc(sizeof(Square));
@@ -125,11 +92,7 @@ void printSquare(Square* square) {
     printf("Square (%d, %d) with side %d\n", square -> p -> x, square -> p -> y, square -> side);
 }
 
-void drawSquare(Square* square) {
-    // A square is a special rectangle
-    Rectangle* rectangle = createRectangle(square -> p, square -> side, square -> side);
-    printRectangle(rectangle);
-}
+
 
 Polygon* createPolygon(Point** points, int nbPoints) {
     Polygon* polygon = malloc(sizeof(Polygon));
@@ -149,21 +112,7 @@ void printPolygon(Polygon* polygon) {
     }
 }
 
-void drawPolygon(Polygon* polygon) {
-    int i;
-    // Initialization of the lines of the polygon
-    Line* line;
-    // Trace the lines of the polygon
-    for (i = 0; i < sizeof(polygon -> points) / sizeof(polygon -> points[0]) - 1; i++) {
-        line = createLine(polygon -> points[i], polygon -> points[i + 1]);
-        traceLine(line);
-        freeLine(line);
-    }
-    // Trace the last line of the polygon
-    line = createLine(polygon -> points[i], polygon -> points[0]);
-    traceLine(line);
-    freeLine(line);
-}
+
 
 Shape* createEmptyShape(ShapeType type) {
     Shape* shape = malloc(sizeof(Shape));
@@ -264,25 +213,108 @@ void printShape(Shape* shape) {
     }
 }
 
-void drawShape(Shape* shape) {
+
+
+void addPixel(Pixel** tabPixels, int* nbPixels, Pixel* pixel) {
+    tabPixels = realloc(tabPixels, (*nbPixels + 1) * sizeof(Pixel));
+    // On ajoute le pixel au tableau
+    tabPixels[*nbPixels] = pixel;
+    // On incrémente le nombre de pixels
+    (*nbPixels)++;
+}
+
+Pixel* createPixel(int x, int y) {
+    Pixel* pixel = malloc(sizeof(Pixel));
+    pixel->x = x;
+    pixel->y = y;
+    return pixel;
+}
+
+void deletePixel(Pixel* pixel) {
+    free(pixel);
+}
+
+void drawPoint(Point* point, Pixel** pixel, int* nb_pixels) {
+    addPixel(pixel, nb_pixels, createPixel(point -> x, point -> y));
+
+}
+
+void drawLine(Line* line, Pixel** pixel, int* nb_pixels) {
+    traceLine(line, pixel, nb_pixels);
+}
+
+void drawCircle(Circle* circle, Pixel** pixel, int* nb_pixels) {
+    traceCircle(circle, pixel, nb_pixels);
+}
+
+void drawRectangle(Rectangle* rectangle, Pixel** pixel, int* nb_pixels) {
+    // Initialization of the 4 points of the rectangle
+    Point* corner0 = createPoint(rectangle -> p -> x, rectangle -> p -> y);
+    Point* corner1 = createPoint(rectangle -> p -> x + rectangle -> width, rectangle -> p -> y);
+    Point* corner2 = createPoint(rectangle -> p -> x + rectangle -> width, rectangle -> p -> y + rectangle -> height);
+    Point* corner3 = createPoint(rectangle -> p -> x, rectangle -> p -> y + rectangle -> height);
+    // Initialization of the 4 lines of the rectangle
+    Line* line0 = createLine(corner0, corner1);
+    Line* line1 = createLine(corner1, corner2);
+    Line* line2 = createLine(corner2, corner3);
+    Line* line3 = createLine(corner3, corner0);
+    // Trace the 4 lines of the rectangle
+    traceLine(line0, pixel, nb_pixels);
+    traceLine(line1, pixel, nb_pixels);
+    traceLine(line2, pixel, nb_pixels);
+    traceLine(line3, pixel, nb_pixels);
+    // Free the 4 lines of the rectangle from memory
+    freeLine(line0);
+    freeLine(line1);
+    freeLine(line2);
+    freeLine(line3);
+    // Free the 4 points of the rectangle from memory
+    freePoint(corner0);
+    freePoint(corner1);
+    freePoint(corner2);
+    freePoint(corner3);
+}
+
+void drawSquare(Square* square, Pixel** pixel, int* nb_pixels) {
+    Rectangle* rectangle = createRectangle(square -> p, square -> side, square -> side);
+    drawRectangle(rectangle, pixel, nb_pixels);
+    freeRectangle(rectangle);
+}
+
+void drawPolygon(Polygon* polygon, Pixel** pixel, int* nb_pixels) {
+    int i;
+    // Trace the lines of the polygon
+    for (i = 0; i < sizeof(polygon -> points) / sizeof(polygon -> points[0]) - 1; i++) {
+        Line* line = createLine(polygon -> points[i], polygon -> points[i + 1]);
+        traceLine(line, pixel, nb_pixels);
+        freeLine(line);
+    }
+    // Trace the last line of the polygon
+    Line* line = createLine(polygon -> points[i], polygon -> points[0]);
+    traceLine(line, pixel, nb_pixels);
+    freeLine(line);
+}
+
+void drawShape(Shape* shape, Pixel** pixel, int* nb_pixels) {
+    // Equivalent à create_shape_to_pixel mais plus logique car on ajoute direct les pixels à la liste pixel
     switch (shape -> type) {
         case POINT:
-            drawPoint(shape -> ptrShape);
+            drawPoint(shape -> ptrShape, pixel, nb_pixels);
             break;
         case LINE:
-            drawLine(shape -> ptrShape);
+            drawLine(shape -> ptrShape, pixel, nb_pixels);
             break;
         case CIRCLE:
-            drawCircle(shape -> ptrShape);
+            drawCircle(shape -> ptrShape, pixel, nb_pixels);
             break;
         case RECTANGLE:
-            drawRectangle(shape -> ptrShape);
+            drawRectangle(shape -> ptrShape, pixel, nb_pixels);
             break;
         case SQUARE:
-            drawSquare(shape -> ptrShape);
+            drawSquare(shape -> ptrShape, pixel, nb_pixels);
             break;
         case POLYGON:
-            drawPolygon(shape -> ptrShape);
+            drawPolygon(shape -> ptrShape, pixel, nb_pixels);
             break;
     }
 }

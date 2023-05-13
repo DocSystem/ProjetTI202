@@ -10,7 +10,7 @@
 #include "chained_list.h"
 
 
-int ActionChoice(Maillon** head) {
+int ActionChoice(Maillon** head, Area** lAreas) {
     printf("Veuillez choisir une action : \n");
     printf("A- Ajouter une forme \n");
     printf("B- Afficher la liste des formes \n");

@@ -17,6 +17,3 @@ void deletePixel(Pixel* pixel) {
     free(pixel);
 }
 
-void pixel_forme(Shape* shape, Pixel** pixel, int* nb_pixel) {
-
-}

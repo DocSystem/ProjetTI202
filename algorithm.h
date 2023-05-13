@@ -6,7 +6,7 @@
 #define PROJETTI202_ALGORITHM_H
 #include "geometry.h"
 
-void traceLine(Line* line);
-void traceCircle(Circle* circle);
+void traceLine(Line* line, Pixel** pixel, int* nb_pixels);
+void traceCircle(Circle* circle, Pixel** pixel, int* nb_pixels);
 
 #endif //PROJETTI202_ALGORITHM_H
