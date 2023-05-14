@@ -12,7 +12,7 @@
 #define VISIBLE 0
 #define INVISIBLE 1
 
-typedef struct {
+typedef struct layer_ {
     unsigned int id;
     char name[255];
     unsigned int visible;
@@ -29,6 +29,8 @@ void set_layer_visible(Layer* layer);
 void set_layer_invisible(Layer* layer);
 void add_shape_to_layer(Layer* layer, Shape* shape);
 void remove_shape_to_layer(Layer* layer, Shape* shape);
+
+Layer* access_layer_by_id(List* layer_list, unsigned int id_layer);
 
 #endif //PROJETTI202_LAYER_H
 

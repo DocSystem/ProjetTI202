@@ -51,6 +51,8 @@ int ActionChoice(Area* area) {
         }
         case 'D': {
             printf("Vous avez choisi de tracer le dessin \n");
+            draw_area(area);
+            print_area(area);
             return 3;
         }
         case 'E': {

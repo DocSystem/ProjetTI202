@@ -6,6 +6,7 @@
 #define PROJETTI202_GEOMETRY_H
 
 
+#include "double_chained_list.h"
 
 typedef struct {
     int x;
@@ -103,12 +104,12 @@ void freeShape(Shape* shape);
 void printShape(Shape* shape);
 
 
-typedef struct {
+typedef struct pixel_{
     int x;
     int y;
 } Pixel;
 
-void addPixel(Pixel** tabPixels, int* nb_pixels, Pixel* pixel);
+void addPixel(List* lPixels, Pixel* pixel);
 
 Pixel* createPixel(int x, int y);
 void deletePixel(Pixel* pixel);
@@ -121,6 +122,6 @@ void drawSquare(Square* square, Pixel** pixel, int* nb_pixels);
 void drawPolygon(Polygon* polygon, Pixel** pixel, int* nb_pixels);
 
 
-void drawShape(Shape* shape, Pixel** pixel, int* nb_pixels);
+void drawShape(Shape* shape, List* pixels;
 
 #endif //PROJETTI202_GEOMETRY_H

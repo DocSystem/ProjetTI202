@@ -6,17 +6,17 @@
 #define PROJETTI202_AREA_H
 
 #include "geometry.h"
-#include "chained_list.h"
+#include "double_chained_list.h"
 
 #define SHAPE_MAX 100 // Nombre maximum de formes
 #define BOOL int
 
-typedef struct {
+typedef struct area_ {
     unsigned int width; // Nombre de pixels en largeur ou nombre de colonnes (axe y)
     unsigned int height; // Nombre de pixels en hauteur ou nombre de lignes (axe x)
     BOOL** mat; // Matrice des pixels de taille (width * height)
-    Maillon* shapes; // Tableau des formes;
-    int nb_shape; // Nombre de formes dans le tableau shapes (taille logique)
+    List* list_layers; // Tableau des couches;
+    unsigned id_layer; // Id de la couche courante
 } Area;
 
 Area* create_area(unsigned int width, unsigned int height);

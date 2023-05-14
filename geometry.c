@@ -7,6 +7,7 @@
 #include "utils.h"
 #include "algorithm.h"
 #include "id.h"
+#include "double_chained_list.h"
 
 
 Point* createPoint(int x, int y) {
@@ -242,12 +243,8 @@ void printShape(Shape* shape) {
 
 
 
-void addPixel(Pixel** tabPixels, int* nbPixels, Pixel* pixel) {
-    tabPixels = realloc(tabPixels, (*nbPixels + 1) * sizeof(Pixel));
-    // On ajoute le pixel au tableau
-    tabPixels[*nbPixels] = pixel;
-    // On incrémente le nombre de pixels
-    (*nbPixels)++;
+void addPixel(List* lPixels, Pixel* pixel) {
+    lst_insert_tail(lPixels, pixel);
 }
 
 Pixel* createPixel(int x, int y) {
@@ -327,29 +324,29 @@ void drawCurve(Curve* curve, Pixel** pixel, int* nb_pixels) {
     traceCurve(curve, pixel, nb_pixels);
 }
 
-void drawShape(Shape* shape, Pixel** pixel, int* nb_pixels) {
+void drawShape(Shape* shape, List* pixels) {
     // Equivalent à create_shape_to_pixel mais plus logique car on ajoute direct les pixels à la liste pixel
     switch (shape -> type) {
         case POINT:
-            drawPoint(shape -> ptrShape, pixel, nb_pixels);
+            drawPoint(shape -> ptrShape, pixels, nb_pixels);
             break;
         case LINE:
-            drawLine(shape -> ptrShape, pixel, nb_pixels);
+            drawLine(shape -> ptrShape, pixels, nb_pixels);
             break;
         case CIRCLE:
-            drawCircle(shape -> ptrShape, pixel, nb_pixels);
+            drawCircle(shape -> ptrShape, pixels, nb_pixels);
             break;
         case RECTANGLE:
-            drawRectangle(shape -> ptrShape, pixel, nb_pixels);
+            drawRectangle(shape -> ptrShape, pixels, nb_pixels);
             break;
         case SQUARE:
-            drawSquare(shape -> ptrShape, pixel, nb_pixels);
+            drawSquare(shape -> ptrShape, pixels, nb_pixels);
             break;
         case POLYGON:
-            drawPolygon(shape -> ptrShape, pixel, nb_pixels);
+            drawPolygon(shape -> ptrShape, pixels, nb_pixels);
             break;
         case CURVE:
-            drawCurve(shape -> ptrShape, pixel, nb_pixels);
+            drawCurve(shape -> ptrShape, pixels, nb_pixels);
             break;
     }
 }

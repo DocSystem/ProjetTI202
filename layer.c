@@ -13,6 +13,7 @@ Layer* create_layer(char* name) {
     strcpy(layer->name, name);
     layer->visible = VISIBLE;
     layer->shapes = lst_create_list();
+    layer->shapes = NULL;
     return layer;
 }
 
@@ -62,4 +63,16 @@ void remove_shape_to_layer(Layer* layer, Shape* shape) {
     } if (node != NULL) {
         lst_delete_node(layer->shapes, node);
     }
+}
+
+Layer* access_layer_by_id(List* layer_list, unsigned int id_layer) {
+    lnode* node = get_first_node(layer_list);
+    while (node != NULL) {
+        Layer* layer = node->data;
+        if (layer->id == id_layer) {
+            return layer;
+        }
+        node = node->next;
+    }
+    return NULL;
 }
