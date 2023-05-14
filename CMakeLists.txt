@@ -30,7 +30,7 @@ add_executable(ProjetTI202
         keyboard.c
         keyboard.h
         id.c
-        id.h gui.c gui.h area.c area.h area.h double_chained_list.c double_chained_list.h)
+        id.h gui.c gui.h area.c area.h area.h double_chained_list.c double_chained_list.h layer.c layer.h)
 
 if(UNIX AND NOT APPLE)
     target_link_libraries(ProjetTI202 ${CURSES_LIBRARIES})

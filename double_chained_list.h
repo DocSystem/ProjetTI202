@@ -28,7 +28,7 @@ void lst_insert_tail(List *list, lnode* pnew);
 void lst_insert_after(List *list, lnode *pnew, lnode *ptr);
 void lst_delete_head(List *list);
 void lst_delete_tail(List *list);
-void lst_delete_lnode(List *list, lnode *ptr);
+void lst_delete_node(List *list, lnode *ptr);
 lnode* get_first_node(List *list);
 lnode* get_last_node(List *list);
 lnode* get_next_node(lnode *node);

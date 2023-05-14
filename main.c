@@ -10,7 +10,7 @@
 
 int main() {
 
-    Area* drawingArea = create_area(10, 10));
+    Area* drawingArea = create_area(10, 10);
 
     int choice = 0;
     while (choice != -99) {

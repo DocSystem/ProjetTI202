@@ -91,7 +91,7 @@ void lst_delete_tail(List *list) {
     free(tmp);
 }
 
-void lst_delete_lnode(List *list, lnode *ptr) {
+void lst_delete_node(List *list, lnode *ptr) {
     if (ptr == list->head) {
         lst_delete_head(list);
     } else if (ptr == list->tail) {

@@ -7,4 +7,6 @@
 
 unsigned int get_next_id();
 
+unsigned int get_next_layer_id();
+
 #endif //PROJETTI202_ID_H

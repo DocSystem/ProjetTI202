@@ -8,3 +8,8 @@ unsigned int get_next_id() {
     static unsigned int id = 0;
     return id++;
 }
+
+unsigned int get_next_layer_id() {
+    static unsigned int id = 0;
+    return id++;
+}
