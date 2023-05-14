@@ -10,15 +10,11 @@
 
 int main() {
 
-    Maillon** lShapes = malloc(sizeof(Maillon*));
-    *lShapes = NULL;
-    Area** lAreas = malloc(sizeof(Area*));
-    *lAreas = NULL;
-    int nAreas = 0;
+    Area* drawingArea = create_area(10, 10));
 
     int choice = 0;
     while (choice != -99) {
-        choice = ActionChoice(lShapes, lAreas, &nAreas);
+        choice = ActionChoice(drawingArea);
     }
     return 0;
 }

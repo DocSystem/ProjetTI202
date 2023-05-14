@@ -10,7 +10,10 @@
 #include "chained_list.h"
 
 
-int ActionChoice(Maillon** head, Area** lAreas, int* nAreas) {
+int ActionChoice(Area* area) {
+
+    Maillon **head = &(area->shapes);
+
     printf("Veuillez choisir une action : \n");
     printf("A- Ajouter une forme \n");
     printf("B- Afficher la liste des formes \n");
@@ -29,14 +32,7 @@ int ActionChoice(Maillon** head, Area** lAreas, int* nAreas) {
             return 0;
         }
         case 'a' :{
-            printf("Vous avez choisi d'ajouter un calque \n");
-            Area* area = create_area(10, 10);
-            realloc(*lAreas, sizeof(Area*) * (++(*nAreas)));
-
-            lAreas[*nAreas] = area;
-
             return 0;
-
         }
         case 'B': {
             printf("Vous avez choisi d'afficher la liste des formes \n");
@@ -45,6 +41,12 @@ int ActionChoice(Maillon** head, Area** lAreas, int* nAreas) {
         }
         case 'C': {
             printf("Vous avez choisi de supprimer une forme \n");
+            printList(*head);
+            printf("Veuillez entrer l'id de la forme à supprimer : \n");
+            int id;
+            scanf(" %d", &id);
+            *head = removeMaillonById(*head, id);
+
             return 2;
         }
         case 'D': {

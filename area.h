@@ -1,12 +1,12 @@
 //
-// Created by Valentin on 14/04/2023.
+// Created by Valentin on 14/05/2023.
 //
-
-#include "geometry.h"
-#include "chained_list.h"
 
 #ifndef PROJETTI202_AREA_H
 #define PROJETTI202_AREA_H
+
+#include "geometry.h"
+#include "chained_list.h"
 
 #define SHAPE_MAX 100 // Nombre maximum de formes
 #define BOOL int
@@ -28,3 +28,4 @@ void draw_area(Area* area);
 void print_area(Area* area);
 
 #endif //PROJETTI202_AREA_H
+
