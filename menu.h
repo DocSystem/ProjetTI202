@@ -6,7 +6,6 @@
 #define PROJETTI202_MENU_H
 
 #include "geometry.h"
-#include "chained_list.h"
 #include "area.h"
 
 int ActionChoice(Area* area);

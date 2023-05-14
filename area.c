@@ -18,7 +18,7 @@ Area* create_area(unsigned int width, unsigned int height) {
     for (int i = 0; i < width; ++i) {
         area->mat[i] = malloc(sizeof(BOOL) * height);
     }
-    area->list_layers = lst_create_list();
+    area->list_layers = create_layer_list();
     Layer* new_layer = create_layer("default");
     lst_insert_head(area->list_layers, lst_create_node(new_layer));
     area->id_layer = 0;
@@ -33,12 +33,7 @@ void add_shape_to_area(Area* area, Shape* shape) {
         printf("Error: Layer not found");
         return;
     }
-    if (current_layer->shapes == NULL) {
-        current_layer->shapes = lst_create_list();
-        lst_insert_head(current_layer->shapes, lst_create_node(shape));
-    } else {
-        lst_insert_tail(current_layer->shapes, lst_create_node(shape));
-    }
+    add_shape_to_layer(current_layer, shape);
 }
 
 void clear_area(Area* area) {
@@ -75,21 +70,23 @@ void draw_area(Area* area) {
     lnode* node = get_first_node(area->list_layers);
     Layer* layer = node->data;
     while (layer != NULL) {
-        lnode* node_shape = get_first_node(layer->shapes);
-        Shape* shape = node_shape->data;
-        while (shape != NULL) {
-            drawShape(shape, pixels);
-            node_shape = node_shape->next;
-            shape = node_shape->data;
+        if (layer->visible == VISIBLE) {
+            lnode *node_shape = get_first_node(layer->shapes);
+            Shape *shape = node_shape->data;
+            while (shape != NULL) {
+                drawShape(shape, pixels);
+                node_shape = get_next_node(node_shape);
+                shape = node_shape->data;
+            }
+            node = get_next_node(node);
+            layer = node->data;
         }
-        node = node->next;
-        layer = node->data;
     }
     lnode* node_pixel = get_first_node(pixels);
     Pixel* pixel = node_pixel->data;
     while (pixel != NULL) {
         area->mat[pixel->x][pixel->y] = 1;
-        node_pixel = node_pixel->next;
+        node_pixel = get_next_node(node_pixel);
         pixel = node_pixel->data;
     }
 }

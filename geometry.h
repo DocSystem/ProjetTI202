@@ -114,12 +114,12 @@ void addPixel(List* lPixels, Pixel* pixel);
 Pixel* createPixel(int x, int y);
 void deletePixel(Pixel* pixel);
 
-void drawPoint(Point* point, Pixel** pixel, int* nb_pixels);
-void drawLine(Line* line, Pixel** pixel, int* nb_pixels);
-void drawCircle(Circle* circle, Pixel** pixel, int* nb_pixels);
-void drawRectangle(Rectangle* rectangle, Pixel** pixel, int* nb_pixels);
-void drawSquare(Square* square, Pixel** pixel, int* nb_pixels);
-void drawPolygon(Polygon* polygon, Pixel** pixel, int* nb_pixels);
+void drawPoint(Point* point, List* pixels);
+void drawLine(Line* line, List* pixels);
+void drawCircle(Circle* circle, List* pixels);
+void drawRectangle(Rectangle* rectangle, List* pixels);
+void drawSquare(Square* square, List* pixels);
+void drawPolygon(Polygon* polygon, List* pixels);
 
 
 void drawShape(Shape* shape, List* pixels;

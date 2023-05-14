@@ -8,7 +8,7 @@
 void sleep(int seconds);
 void clearScreen();
 
-typedef struct {
+typedef struct{
     int width;
     int height;
 } win_size;

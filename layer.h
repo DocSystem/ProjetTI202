@@ -32,6 +32,8 @@ void remove_shape_to_layer(Layer* layer, Shape* shape);
 
 Layer* access_layer_by_id(List* layer_list, unsigned int id_layer);
 
+void print_layer(Layer* layer);
+
 #endif //PROJETTI202_LAYER_H
 
 //TODO Sublayers

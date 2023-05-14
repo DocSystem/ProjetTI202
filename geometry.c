@@ -258,20 +258,20 @@ void deletePixel(Pixel* pixel) {
     free(pixel);
 }
 
-void drawPoint(Point* point, Pixel** pixel, int* nb_pixels) {
-    addPixel(pixel, nb_pixels, createPixel(point -> x, point -> y));
+void drawPoint(Point* point, List* pixels) {
+    addPixel(pixels, createPixel(point -> x, point -> y));
 
 }
 
-void drawLine(Line* line, Pixel** pixel, int* nb_pixels) {
-    traceLine(line, pixel, nb_pixels);
+void drawLine(Line* line, List* pixels) {
+    traceLine(line, pixels);
 }
 
-void drawCircle(Circle* circle, Pixel** pixel, int* nb_pixels) {
-    traceCircle(circle, pixel, nb_pixels);
+void drawCircle(Circle* circle, List* pixels) {
+    traceCircle(circle, pixels);
 }
 
-void drawRectangle(Rectangle* rectangle, Pixel** pixel, int* nb_pixels) {
+void drawRectangle(Rectangle* rectangle, List* pixels) {
     // Initialization of the 4 points of the rectangle
     Point* corner0 = createPoint(rectangle -> p -> x, rectangle -> p -> y);
     Point* corner1 = createPoint(rectangle -> p -> x + rectangle -> width, rectangle -> p -> y);
@@ -283,10 +283,10 @@ void drawRectangle(Rectangle* rectangle, Pixel** pixel, int* nb_pixels) {
     Line* line2 = createLine(corner2, corner3);
     Line* line3 = createLine(corner3, corner0);
     // Trace the 4 lines of the rectangle
-    traceLine(line0, pixel, nb_pixels);
-    traceLine(line1, pixel, nb_pixels);
-    traceLine(line2, pixel, nb_pixels);
-    traceLine(line3, pixel, nb_pixels);
+    traceLine(line0, pixels);
+    traceLine(line1, pixels);
+    traceLine(line2, pixels);
+    traceLine(line3, pixels);
     // Free the 4 lines of the rectangle from memory
     freeLine(line0);
     freeLine(line1);
@@ -299,54 +299,54 @@ void drawRectangle(Rectangle* rectangle, Pixel** pixel, int* nb_pixels) {
     freePoint(corner3);
 }
 
-void drawSquare(Square* square, Pixel** pixel, int* nb_pixels) {
+void drawSquare(Square* square, List* pixels) {
     Rectangle* rectangle = createRectangle(square -> p, square -> side, square -> side);
-    drawRectangle(rectangle, pixel, nb_pixels);
+    drawRectangle(rectangle, pixels);
     freeRectangle(rectangle);
 }
 
-void drawPolygon(Polygon* polygon, Pixel** pixel, int* nb_pixels) {
+void drawPolygon(Polygon* polygon, List* pixels) {
     int i;
     // Trace the lines of the polygon
-    for (i = 0; i < sizeof(polygon -> points) / sizeof(polygon -> points[0]) - 1; i++) {
+    for (i = 0; i < polygon->nbPoints; i++) {
         Line* line = createLine(polygon -> points[i], polygon -> points[i + 1]);
-        traceLine(line, pixel, nb_pixels);
+        traceLine(line, pixels);
         freeLine(line);
     }
     // Trace the last line of the polygon
     Line* line = createLine(polygon -> points[i], polygon -> points[0]);
-    traceLine(line, pixel, nb_pixels);
+    traceLine(line, pixels);
     freeLine(line);
 }
 
-void drawCurve(Curve* curve, Pixel** pixel, int* nb_pixels) {
+void drawCurve(Curve* curve, List* pixels) {
     // Trace the curve
-    traceCurve(curve, pixel, nb_pixels);
+    traceCurve(curve, pixels);
 }
 
 void drawShape(Shape* shape, List* pixels) {
     // Equivalent à create_shape_to_pixel mais plus logique car on ajoute direct les pixels à la liste pixel
     switch (shape -> type) {
         case POINT:
-            drawPoint(shape -> ptrShape, pixels, nb_pixels);
+            drawPoint(shape -> ptrShape, pixels);
             break;
         case LINE:
-            drawLine(shape -> ptrShape, pixels, nb_pixels);
+            drawLine(shape -> ptrShape, pixels);
             break;
         case CIRCLE:
-            drawCircle(shape -> ptrShape, pixels, nb_pixels);
+            drawCircle(shape -> ptrShape, pixels);
             break;
         case RECTANGLE:
-            drawRectangle(shape -> ptrShape, pixels, nb_pixels);
+            drawRectangle(shape -> ptrShape, pixels);
             break;
         case SQUARE:
-            drawSquare(shape -> ptrShape, pixels, nb_pixels);
+            drawSquare(shape -> ptrShape, pixels);
             break;
         case POLYGON:
-            drawPolygon(shape -> ptrShape, pixels, nb_pixels);
+            drawPolygon(shape -> ptrShape, pixels);
             break;
         case CURVE:
-            drawCurve(shape -> ptrShape, pixels, nb_pixels);
+            drawCurve(shape -> ptrShape, pixels);
             break;
     }
 }

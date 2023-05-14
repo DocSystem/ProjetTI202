@@ -8,10 +8,9 @@
 #include "geometry.h"
 #include "double_chained_list.h"
 
-#define SHAPE_MAX 100 // Nombre maximum de formes
 #define BOOL int
 
-typedef struct area_ {
+typedef struct {
     unsigned int width; // Nombre de pixels en largeur ou nombre de colonnes (axe y)
     unsigned int height; // Nombre de pixels en hauteur ou nombre de lignes (axe x)
     BOOL** mat; // Matrice des pixels de taille (width * height)

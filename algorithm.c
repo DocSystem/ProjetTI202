@@ -3,11 +3,11 @@
 //
 
 #include "algorithm.h"
-#include "utils.h"
 #include "geometry.h"
+#include "double_chained_list.h"
 
 
-void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
+void traceLine(Line* line, List* pixel) {
     /* Cet algorithme est inspiré de celui présenté dans le cours de TI202
      * Il vient de cette page : "https://fr.wikipedia.org/wiki/Algorithme_de_trac%C3%A9_de_segment_de_Bresenham"
      * Il a été adapté pour fonctionner avec les coordonnées de la structure Line
@@ -40,7 +40,7 @@ void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
                         dx = e * 2;
                         dy = dy * 2;
                         do {
-                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
+                            addPixel(pixel, createPixel(x1, y1));
                             e = e - dy;
                             if (e < 0) {
                                 y1++; // Déplacement diagonal
@@ -56,7 +56,7 @@ void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
                         dy = e * 2;
                         dx = dx * 2;
                         do {
-                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
+                            addPixel(pixel, createPixel(x1, y1));
                             e = e - dx;
                             if (e < 0) {
                                 x1++; // Déplacement diagonal
@@ -75,7 +75,7 @@ void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
                         dx = e * 2;
                         dy = dy * 2;
                         do {
-                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
+                            addPixel(pixel, createPixel(x1, y1));
                             e = e + dy;
                             if (e < 0) {
                                 y1--;
@@ -91,7 +91,7 @@ void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
                         dy = e * 2;
                         dx = dx * 2;
                         do {
-                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
+                            addPixel(pixel, createPixel(x1, y1));
                             e = e + dx;
                             if (e > 0) {
                                 x1++;
@@ -104,7 +104,7 @@ void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
             } else {
                 // Vecteur horizontal vers la droite
                 do {
-                    addPixel(pixel, nb_pixels, createPixel(x1, y1));
+                    addPixel(pixel, createPixel(x1, y1));
                     x1++;
                 } while (x1 != x2);
             }
@@ -121,7 +121,7 @@ void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
                         dx = e * 2;
                         dy = dy * 2;
                         do {
-                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
+                            addPixel(pixel, createPixel(x1, y1));
                             e = e + dy;
                             if (e >= 0) {
                                 y1++; // Déplacement diagonal
@@ -137,7 +137,7 @@ void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
                         dy = e * 2;
                         dx = dx * 2;
                         do {
-                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
+                            addPixel(pixel, createPixel(x1, y1));
                             e = e + dx;
                             if (e <= 0) {
                                 x1--;
@@ -156,7 +156,7 @@ void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
                         dx = e * 2;
                         dy = dy * 2;
                         do {
-                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
+                            addPixel(pixel, createPixel(x1, y1));
                             e = e - dy;
                             if (e >= 0) {
                                 y1--; // Déplacement diagonal
@@ -172,7 +172,7 @@ void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
                         dy = e * 2;
                         dx = dx * 2;
                         do {
-                            addPixel(pixel, nb_pixels, createPixel(x1, y1));
+                            addPixel(pixel, createPixel(x1, y1));
                             e = e - dx;
                             if (e >= 0) {
                                 x1--;
@@ -186,7 +186,7 @@ void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
                 // dy = 0 et dx < 0
                 // Vecteur horizontal vers la gauche
                 do {
-                    addPixel(pixel, nb_pixels, createPixel(x1, y1));
+                    addPixel(pixel, createPixel(x1, y1));
                     x1--;
                 } while (x1 != x2);
             }
@@ -198,13 +198,13 @@ void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
             if (dy > 0) {
                 // Vecteur vertical croissant
                 do {
-                    addPixel(pixel, nb_pixels, createPixel(x1, y1));
+                    addPixel(pixel, createPixel(x1, y1));
                     y1++;
                 } while (y1 != y2);
             } else {
                 // Vecteur vertical décroissant
                 do {
-                    addPixel(pixel, nb_pixels, createPixel(x1, y1));
+                    addPixel(pixel, createPixel(x1, y1));
                     y1--;
                 } while (y1 != y2);
             }
@@ -213,7 +213,7 @@ void traceLine(Line* line, Pixel** pixel, int* nb_pixels){
     // Le pixel final (x2, y2) n'est pas tracé
 }
 
-void traceCircle(Circle* circle, Pixel** pixel, int* nb_pixels) {
+void traceCircle(Circle* circle, List* pixel) {
     /* Cet algorithme est inspiré de celui présenté dans le cours de TI202
      * Il vient de cette page : "https://fr.wikipedia.org/wiki/Algorithme_de_trac%C3%A9_de_cercle_d%27Andres"
      * Il a été adapté pour fonctionner avec les coordonnées de la structure Circle
@@ -229,14 +229,14 @@ void traceCircle(Circle* circle, Pixel** pixel, int* nb_pixels) {
     while(y >= x) {
 
         // Tracé d'un pixel par octants
-        addPixel(pixel, nb_pixels, createPixel(x_center + x, y_center + y));
-        addPixel(pixel, nb_pixels, createPixel(x_center + y, y_center + x));
-        addPixel(pixel, nb_pixels, createPixel(x_center - x, y_center + y));
-        addPixel(pixel, nb_pixels, createPixel(x_center - y, y_center + x));
-        addPixel(pixel, nb_pixels, createPixel(x_center + x, y_center - y));
-        addPixel(pixel, nb_pixels, createPixel(x_center + y, y_center - x));
-        addPixel(pixel, nb_pixels, createPixel(x_center - x, y_center - y));
-        addPixel(pixel, nb_pixels, createPixel(x_center - y, y_center - x));
+        addPixel(pixel, createPixel(x_center + x, y_center + y));
+        addPixel(pixel, createPixel(x_center + y, y_center + x));
+        addPixel(pixel, createPixel(x_center - x, y_center + y));
+        addPixel(pixel, createPixel(x_center - y, y_center + x));
+        addPixel(pixel, createPixel(x_center + x, y_center - y));
+        addPixel(pixel, createPixel(x_center + y, y_center - x));
+        addPixel(pixel, createPixel(x_center - x, y_center - y));
+        addPixel(pixel, createPixel(x_center - y, y_center - x));
 
         if (d >= 2 * x) {
             d -= 2 * x++ - 1;
@@ -253,7 +253,7 @@ void traceCircle(Circle* circle, Pixel** pixel, int* nb_pixels) {
 Point* calc_point_median(Point* p1, Point* p2, double t) {
     double x = (1 - t) * p1 -> x + t * p2 -> x;
     double y = (1 - t) * p1 -> y + t * p2 -> y;
-    Point* p = createPoint(x, y);
+    Point* p = createPoint((int) x, (int) y);
     return p;
 }
 
@@ -270,7 +270,7 @@ Point* cj_calc(Point** points, int num_pt, double t) {
     return tmp_pt[0];
 }
 
-void traceCurve(Curve* curve, Pixel** pixel, int* nb_pixels) {
+void traceCurve(Curve* curve, List* pixel) {
     /* Cet algorithme est inspiré de celui présenté dans le fichier de présentation du projet
      * Il reprend les principes de l'algorithme de Casteljau (disponible sur cette page : "https://fr.wikipedia.org/wiki/Algorithme_de_Casteljau")
      * Il a été adapté pour fonctionner avec les coordonnées de la structure Curve
@@ -282,6 +282,6 @@ void traceCurve(Curve* curve, Pixel** pixel, int* nb_pixels) {
     for (t = 0; t < 1; t += 0.001) {
         Point* cjp1 = cj_calc(tab_points, num_pt, t);
         Pixel* p = createPixel(cjp1 -> x, cjp1 -> y);
-        addPixel(pixel, nb_pixels, p);
+        addPixel(pixel, p);
     }
 }

@@ -5,10 +5,11 @@
 #ifndef PROJETTI202_ALGORITHM_H
 #define PROJETTI202_ALGORITHM_H
 #include "geometry.h"
+#include "double_chained_list.h"
 
-void traceLine(Line* line, Pixel** pixel, int* nb_pixels);
-void traceCircle(Circle* circle, Pixel** pixel, int* nb_pixels);
+void traceLine(Line* line, List* pixel);
+void traceCircle(Circle* circle, List* pixel);
 
-void traceCurve(Curve* curve, Pixel** pixel, int* nb_pixels);
+void traceCurve(Curve* curve, List* pixel);
 
 #endif //PROJETTI202_ALGORITHM_H

@@ -7,20 +7,28 @@
 
 #include "menu.h"
 #include "geometry.h"
-#include "chained_list.h"
+#include "double_chained_list.h"
+#include "layer.h"
 
 
 int ActionChoice(Area* area) {
 
-    Maillon **head = &(area->shapes);
 
+    printf("Bienvenue dans le menu principal \n");
     printf("Veuillez choisir une action : \n");
     printf("A- Ajouter une forme \n");
+    printf("a- Ajouter un calque \n");
     printf("B- Afficher la liste des formes \n");
+    printf("b- Afficher la liste des calques \n");
     printf("C- Supprimer une forme \n");
+    printf("c- Supprimer un calque \n");
     printf("D- Tracer le dessin \n");
-    printf("E- Aide \n");
-    printf("F- Quitter \n");
+    printf("d- Changer de calque \n");
+    printf("E- Afficher la calque actif \n");
+    printf("e- Cacher le calque actif \n");
+
+    printf("F- Aide \n");
+    printf("G- Quitter \n");
     char choice;
     scanf(" %c", &choice);
     switch (choice) {
@@ -28,26 +36,79 @@ int ActionChoice(Area* area) {
 
             printf("Vous avez choisi d'ajouter une forme \n");
             Shape *shape = ShapeChoice();
-            *head = addMaillon(*head, shape);
-            return 0;
+            add_shape_to_area(area, shape);
+            return 1;
         }
         case 'a' :{
-            return 0;
+            printf("Vous avez choisi d'ajouter un calque \n");
+            printf("Veuillez entrer le nom du calque : \n");
+            char name[20];
+            scanf(" %s", name);
+            Layer* layer = create_layer(name);
+            add_layer_to_list(area->list_layers, layer);
+            area->id_layer = ((Layer*) get_last_node(area->list_layers))->id;
+            return -1;
         }
         case 'B': {
             printf("Vous avez choisi d'afficher la liste des formes \n");
-            printList(*head);
+            Layer* current_layer = access_layer_by_id(area->list_layers, area->id_layer);
+            lnode *node = get_first_node(current_layer->shapes);
+            while (node != NULL) {
+                Shape* shape = (Shape*) node->data;
+                printShape(shape);
+                node = get_next_node(node);
+            }
+            return 2;
+        }
+        case 'b' :{
+            printf("Vous avez choisi d'afficher la liste des calques \n");
+            lnode* node = get_first_node(area->list_layers);
+            while (node != NULL) {
+                Layer* layer = (Layer*) node->data;
+                print_layer(layer);
+                node = get_next_node(node);
+            }
             return 1;
         }
         case 'C': {
             printf("Vous avez choisi de supprimer une forme \n");
-            printList(*head);
+            Layer* current_layer = access_layer_by_id(area->list_layers, area->id_layer);
+            // Affichage des formes du calque actif
+            printf("Formes du calque actif : \n");
+            lnode* node = get_first_node(current_layer->shapes);
+            while (node != NULL) {
+                Shape* shape = (Shape*) node->data;
+                printShape(shape);
+                node = get_next_node(node);
+            }
             printf("Veuillez entrer l'id de la forme à supprimer : \n");
             int id;
             scanf(" %d", &id);
-            *head = removeMaillonById(*head, id);
-
-            return 2;
+            lnode* node_shape = get_first_node(current_layer->shapes);
+            while (node_shape != NULL) {
+                Shape* shape = (Shape*) node_shape->data;
+                if (shape->id == id) {
+                    lst_delete_node(current_layer->shapes, node_shape);
+                    return 2;
+                }
+                node_shape = get_next_node(node_shape);
+            }
+            printf("La forme n'a pas été trouvée \n");
+            return 29;
+        }
+        case 'c':
+        {
+            printf("Vous avez choisi de supprimer un calque \n");
+            printf("Veuillez entrer l'id du calque à supprimer : \n");
+            int id;
+            scanf(" %d", &id);
+            Layer* layer = access_layer_by_id(area->list_layers, id);
+            if (layer != NULL) {
+                remove_layer_from_list(area->list_layers, layer);
+                return -2;
+            }
+            printf("Le calque n'a pas été trouvé \n");
+            return -29;
         }
         case 'D': {
             printf("Vous avez choisi de tracer le dessin \n");
@@ -55,17 +116,43 @@ int ActionChoice(Area* area) {
             print_area(area);
             return 3;
         }
+        case 'd': {
+            printf("Vous avez choisi de changer de calque \n");
+            printf("Veuillez entrer l'id du calque : \n");
+            int id;
+            scanf(" %d", &id);
+            Layer* layer = access_layer_by_id(area->list_layers, id);
+            if (layer != NULL) {
+                area->id_layer = id;
+                return -3;
+            }
+            printf("Le calque n'a pas été trouvé \n");
+            return -39;
+        }
         case 'E': {
-            printf("Vous avez choisi d'afficher l'aide \n");
+            printf("Vous avez choisi d'afficher le calque actif \n");
+            Layer* current_layer = access_layer_by_id(area->list_layers, area->id_layer);
+            set_layer_visible(current_layer);
+
             return 4;
         }
+        case 'e': {
+            printf("Vous avez choisi de cacher le calque actif \n");
+            Layer* current_layer = access_layer_by_id(area->list_layers, area->id_layer);
+            set_layer_invisible(current_layer);
+            return -4;
+        }
         case 'F': {
+            printf("Vous avez choisi d'afficher l'aide \n");
+            return 5;
+        }
+        case 'G': {
             printf("Vous avez choisi de quitter \n");
             return -99;
         }
         default: {
             printf("Vous n'avez pas choisi une action valide \n");
-            return -1;
+            return -98;
         }
 
     }

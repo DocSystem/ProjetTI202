@@ -18,8 +18,6 @@ include_directories(.)
 add_executable(ProjetTI202
         algorithm.c
         algorithm.h
-        chained_list.c
-        chained_list.h
         geometry.c
         geometry.h
         main.c

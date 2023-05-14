@@ -3,6 +3,7 @@
 //
 
 #include <string.h>
+#include <stdio.h>
 #include "layer.h"
 #include "id.h"
 
@@ -75,4 +76,10 @@ Layer* access_layer_by_id(List* layer_list, unsigned int id_layer) {
         node = node->next;
     }
     return NULL;
+}
+
+void print_layer(Layer* layer) {
+    printf("Layer %d: %s\t", layer->id, layer->name);
+    printf("Visible: %d", layer->visible);
+    printf("\n");
 }

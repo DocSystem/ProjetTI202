@@ -11,13 +11,12 @@ typedef struct lnode_ {
     void *data;
     struct lnode_ *prev;
     struct lnode_ *next;
-};
-typedef struct lnode_ lnode;
-struct list_ {
+} lnode;
+
+typedef struct list_ {
     lnode *head;
     lnode *tail;
-};
-typedef struct list_ List;
+} List;
 
 
 lnode* lst_create_node(void *data);
