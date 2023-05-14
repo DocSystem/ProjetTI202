@@ -9,7 +9,7 @@
 #include "chained_list.h"
 #include "area.h"
 
-int ActionChoice(Maillon** head, Area** lAreas);
+int ActionChoice(Maillon** head, Area** lAreas, int* nAreas);
 Shape* ShapeChoice();
 
 #endif //PROJETTI202_MENU_H

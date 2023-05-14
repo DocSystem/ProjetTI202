@@ -6,6 +6,8 @@
 #define PROJETTI202_CHAINED_LIST_H
 
 #include "geometry.h"
+#include "area.h"
+
 
 
 struct Maillon {

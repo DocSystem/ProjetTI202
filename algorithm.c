@@ -247,3 +247,41 @@ void traceCircle(Circle* circle, Pixel** pixel, int* nb_pixels) {
         }
     }
 }
+
+// ALGORITHME DE CASTELJAU
+
+Point* calc_point_median(Point* p1, Point* p2, double t) {
+    double x = (1 - t) * p1 -> x + t * p2 -> x;
+    double y = (1 - t) * p1 -> y + t * p2 -> y;
+    Point* p = createPoint(x, y);
+    return p;
+}
+
+Point* cj_calc(Point** points, int num_pt, double t) {
+    Point* tmp_pt[num_pt];
+    for (int i = 0; i < num_pt - 1; i++) {
+        tmp_pt[i] = points[i];
+    }
+    for (int i = 0; i < num_pt - 1; i++) {
+        for (int j = 0; j < i; ++j) {
+            tmp_pt[j] = calc_point_median(tmp_pt[j], tmp_pt[j + 1], t);
+        }
+    }
+    return tmp_pt[0];
+}
+
+void traceCurve(Curve* curve, Pixel** pixel, int* nb_pixels) {
+    /* Cet algorithme est inspiré de celui présenté dans le fichier de présentation du projet
+     * Il reprend les principes de l'algorithme de Casteljau (disponible sur cette page : "https://fr.wikipedia.org/wiki/Algorithme_de_Casteljau")
+     * Il a été adapté pour fonctionner avec les coordonnées de la structure Curve
+     * et pour fonctionner avec la fonction addPixel de geometry.c
+     */
+    Point* tab_points[] = {curve -> p1, curve -> p2, curve -> p3, curve -> p4};
+    int num_pt = 4;
+    double t;
+    for (t = 0; t < 1; t += 0.001) {
+        Point* cjp1 = cj_calc(tab_points, num_pt, t);
+        Pixel* p = createPixel(cjp1 -> x, cjp1 -> y);
+        addPixel(pixel, nb_pixels, p);
+    }
+}

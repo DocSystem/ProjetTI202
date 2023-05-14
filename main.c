@@ -14,10 +14,11 @@ int main() {
     *lShapes = NULL;
     Area** lAreas = malloc(sizeof(Area*));
     *lAreas = NULL;
+    int nAreas = 0;
 
     int choice = 0;
     while (choice != -99) {
-        choice = ActionChoice(lShapes, lAreas);
+        choice = ActionChoice(lShapes, lAreas, &nAreas);
     }
     return 0;
 }

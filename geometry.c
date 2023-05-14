@@ -112,6 +112,23 @@ void printPolygon(Polygon* polygon) {
     }
 }
 
+Curve* createCurve(Point* p1, Point* p2, Point* p3, Point* p4) {
+    Curve* curve = malloc(sizeof(Curve));
+    curve -> p1 = p1;
+    curve -> p2 = p2;
+    curve -> p3 = p3;
+    curve -> p4 = p4;
+    return curve;
+}
+
+void freeCurve(Curve* curve) {
+    free(curve);
+}
+
+void printCurve(Curve* curve) {
+    printf("Curve (%d, %d) -> (%d, %d) -> (%d, %d) -> (%d, %d)\n", curve -> p1 -> x, curve -> p1 -> y, curve -> p2 -> x, curve -> p2 -> y, curve -> p3 -> x, curve -> p3 -> y, curve -> p4 -> x, curve -> p4 -> y);
+}
+
 
 
 Shape* createEmptyShape(ShapeType type) {
@@ -166,6 +183,13 @@ Shape* createPolygonShape(Point** points, int nbPoints) {
     return shape;
 }
 
+Shape* createCurveShape(Point* p1, Point* p2, Point* p3, Point* p4) {
+    Shape* shape = createEmptyShape(CURVE);
+    Curve* curve = createCurve(p1, p2, p3, p4);
+    shape -> ptrShape = curve;
+    return shape;
+}
+
 void freeShape(Shape* shape) {
     switch (shape -> type) {
         case POINT:
@@ -209,6 +233,9 @@ void printShape(Shape* shape) {
             break;
         case POLYGON:
             printPolygon(shape -> ptrShape);
+            break;
+        case CURVE:
+            printCurve(shape -> ptrShape);
             break;
     }
 }
@@ -295,6 +322,11 @@ void drawPolygon(Polygon* polygon, Pixel** pixel, int* nb_pixels) {
     freeLine(line);
 }
 
+void drawCurve(Curve* curve, Pixel** pixel, int* nb_pixels) {
+    // Trace the curve
+    traceCurve(curve, pixel, nb_pixels);
+}
+
 void drawShape(Shape* shape, Pixel** pixel, int* nb_pixels) {
     // Equivalent à create_shape_to_pixel mais plus logique car on ajoute direct les pixels à la liste pixel
     switch (shape -> type) {
@@ -315,6 +347,9 @@ void drawShape(Shape* shape, Pixel** pixel, int* nb_pixels) {
             break;
         case POLYGON:
             drawPolygon(shape -> ptrShape, pixel, nb_pixels);
+            break;
+        case CURVE:
+            drawCurve(shape -> ptrShape, pixel, nb_pixels);
             break;
     }
 }

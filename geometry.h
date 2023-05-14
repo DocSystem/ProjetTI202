@@ -38,6 +38,13 @@ typedef struct {
     Point** points;
 } Polygon;
 
+typedef struct {
+    Point* p1;
+    Point* p2;
+    Point* p3;
+    Point* p4;
+} Curve;
+
 Point* createPoint(int x, int y);
 void freePoint(Point* point);
 void printPoint(Point* point);
@@ -64,13 +71,18 @@ Polygon* createPolygon(Point** points, int nbPoints);
 void freePolygon(Polygon* polygon);
 void printPolygon(Polygon* polygon);
 
+Curve* createCurve(Point* p1, Point* p2, Point* p3, Point* p4);
+void freeCurve(Curve* curve);
+void printCurve(Curve* curve);
+
 typedef enum {
     POINT,
     LINE,
     CIRCLE,
     RECTANGLE,
     SQUARE,
-    POLYGON
+    POLYGON,
+    CURVE
 } ShapeType;
 
 typedef struct {
@@ -86,6 +98,7 @@ Shape* createCircleShape(Point* center, int radius);
 Shape* createRectangleShape(Point* p, int width, int height);
 Shape* createSquareShape(Point* p, int side);
 Shape* createPolygonShape(Point** points, int nbPoints);
+Shape* createCurveShape(Point* p1, Point* p2, Point* p3, Point* p4);
 void freeShape(Shape* shape);
 void printShape(Shape* shape);
 

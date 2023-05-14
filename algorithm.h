@@ -9,4 +9,6 @@
 void traceLine(Line* line, Pixel** pixel, int* nb_pixels);
 void traceCircle(Circle* circle, Pixel** pixel, int* nb_pixels);
 
+void traceCurve(Curve* curve, Pixel** pixel, int* nb_pixels);
+
 #endif //PROJETTI202_ALGORITHM_H
