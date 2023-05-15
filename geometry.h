@@ -86,9 +86,9 @@ typedef enum {
     CURVE
 } ShapeType;
 
-typedef struct {
+typedef struct shape_ {
     ShapeType type;
-    int id;
+    unsigned int id;
     void* ptrShape;
 } Shape;
 
@@ -122,6 +122,6 @@ void drawSquare(Square* square, List* pixels);
 void drawPolygon(Polygon* polygon, List* pixels);
 
 
-void drawShape(Shape* shape, List* pixels;
+void drawShape(Shape* shape, List* pixels);
 
 #endif //PROJETTI202_GEOMETRY_H

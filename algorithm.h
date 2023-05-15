@@ -4,6 +4,7 @@
 
 #ifndef PROJETTI202_ALGORITHM_H
 #define PROJETTI202_ALGORITHM_H
+
 #include "geometry.h"
 #include "double_chained_list.h"
 

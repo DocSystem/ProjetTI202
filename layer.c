@@ -38,8 +38,10 @@ void add_layer_to_list(List* layer_list, Layer* layer) {
 
 void remove_layer_from_list(List* layer_list, Layer* layer) {
     lnode* node = layer_list->head;
-    while (node != NULL && ((Layer*) node->data)->id != layer) {
-        node = node->next;
+    while (node != NULL)  {
+        if (((Layer*) node->data)->id != layer->id) {
+            node = node->next;
+        }
     } if (node != NULL) {
         lst_delete_node(layer_list, node);
     }
@@ -59,8 +61,10 @@ void add_shape_to_layer(Layer* layer, Shape* shape) {
 
 void remove_shape_to_layer(Layer* layer, Shape* shape) {
     lnode* node = layer->shapes->head;
-    while (node != NULL && ((Shape*) node->data)->id != shape) {
-        node = node->next;
+    while (node != NULL) {
+        if (((Layer*) node->data)->id != shape->id) {
+            node = node->next;
+        }
     } if (node != NULL) {
         lst_delete_node(layer->shapes, node);
     }

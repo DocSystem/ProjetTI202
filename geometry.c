@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "geometry.h"
-#include "utils.h"
 #include "algorithm.h"
 #include "id.h"
 #include "double_chained_list.h"
