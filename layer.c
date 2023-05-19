@@ -14,7 +14,6 @@ Layer* create_layer(char* name) {
     strcpy(layer->name, name);
     layer->visible = VISIBLE;
     layer->shapes = lst_create_list();
-    layer->shapes = NULL;
     return layer;
 }
 
@@ -62,7 +61,7 @@ void add_shape_to_layer(Layer* layer, Shape* shape) {
 void remove_shape_to_layer(Layer* layer, Shape* shape) {
     lnode* node = layer->shapes->head;
     while (node != NULL) {
-        if (((Layer*) node->data)->id != shape->id) {
+        if (((Layer*) get_data(node))->id != shape->id) {
             node = node->next;
         }
     } if (node != NULL) {
@@ -73,7 +72,10 @@ void remove_shape_to_layer(Layer* layer, Shape* shape) {
 Layer* access_layer_by_id(List* layer_list, unsigned int id_layer) {
     lnode* node = get_first_node(layer_list);
     while (node != NULL) {
-        Layer* layer = node->data;
+        Layer* layer = get_data(node);
+        if (layer == NULL) {
+            return NULL;
+        }
         if (layer->id == id_layer) {
             return layer;
         }
@@ -84,6 +86,6 @@ Layer* access_layer_by_id(List* layer_list, unsigned int id_layer) {
 
 void print_layer(Layer* layer) {
     printf("Layer %d: %s\t", layer->id, layer->name);
-    printf("Visible: %d", layer->visible);
+    printf("Visible: %s", layer->visible?"Non":"Oui");
     printf("\n");
 }

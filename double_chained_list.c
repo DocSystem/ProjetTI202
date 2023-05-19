@@ -42,6 +42,9 @@ void lst_insert_head(List *list, lnode* pnew) {
 }
 
 void lst_insert_tail(List *list, lnode* pnew) {
+    if (list == NULL) {
+        list = lst_create_list();
+    }
     if (list->head == NULL) {
         list->head = pnew;
         list->tail = pnew;
@@ -104,6 +107,9 @@ void lst_delete_node(List *list, lnode *ptr) {
 }
 
 lnode* get_first_node(List *list) {
+    if (list == NULL) {
+        return NULL;
+    }
     return list->head;
 }
 
@@ -127,4 +133,11 @@ lnode* get_node_by_index(List *list, int index) {
         i++;
     }
     return p;
+}
+
+void* get_data(lnode* node) {
+    if (node == NULL) {
+        return NULL;
+    }
+    return node->data;
 }

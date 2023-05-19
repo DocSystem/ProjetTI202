@@ -68,26 +68,26 @@ void delete_area(Area* area) {
 void draw_area(Area* area) {
     List* pixels = lst_create_list();
     lnode* node = get_first_node(area->list_layers);
-    Layer* layer = node->data;
+    Layer* layer = get_data(node);
     while (layer != NULL) {
         if (layer->visible == VISIBLE) {
             lnode *node_shape = get_first_node(layer->shapes);
-            Shape *shape = node_shape->data;
+            Shape *shape = get_data(node_shape);
             while (shape != NULL) {
                 drawShape(shape, pixels);
                 node_shape = get_next_node(node_shape);
-                shape = node_shape->data;
+                shape = get_data(node_shape);
             }
             node = get_next_node(node);
-            layer = node->data;
+            layer = get_data(node);
         }
     }
     lnode* node_pixel = get_first_node(pixels);
-    Pixel* pixel = node_pixel->data;
+    Pixel* pixel = get_data(node_pixel);
     while (pixel != NULL) {
-        area->mat[pixel->x][pixel->y] = 1;
+        (area->mat)[pixel->x][pixel->y] = 1;
         node_pixel = get_next_node(node_pixel);
-        pixel = node_pixel->data;
+        pixel = get_data(node_pixel);
     }
 }
 

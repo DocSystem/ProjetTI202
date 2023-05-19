@@ -35,5 +35,6 @@ void* get_previous_elem(List *list);
 
 lnode* get_node_by_index(List *list, int index);
 
+void* get_data(lnode* node);
 
 #endif //PROJETTI202_DOUBLE_CHAINED_LIST_H

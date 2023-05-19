@@ -13,7 +13,7 @@
 
 int ActionChoice(Area* area) {
 
-
+    printf("\n");
     printf("Bienvenue dans le menu principal \n");
     printf("Veuillez choisir une action : \n");
     printf("A- Ajouter une forme \n");
