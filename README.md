@@ -49,6 +49,13 @@ Un éditeur d'images vectorielles dans le terminal.
 
 ### Depuis le code source
 
+#### Dépendances
+
+* [CMake](https://cmake.org/download/) >= 3.16
+* [GNU Make](https://www.gnu.org/software/make/) (Linux et macOS uniquement)
+
+#### Compilation
+
 * Sur Linux et macOS, exécutez les commandes suivantes :
 ```bash
 mkdir build
