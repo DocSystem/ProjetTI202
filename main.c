@@ -256,9 +256,13 @@ void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
 }
 
 int main() {
+    int emojiSupported = 1;
     #if WIN32
     // Allow emojis on Windows
-    system("chcp 65001");
+    system("chcp 65001 > nul");
+    if (getenv("WT_SESSION") == NULL) {
+        emojiSupported = 0;
+    }
     #endif
     /*showWindowBox();
     Point* p = createPoint(10, 2);
@@ -328,11 +332,18 @@ int main() {
                     lnode* n = drawingArea->list_layers->head;
                     while (n != NULL) {
                         Layer* l = (Layer*) n->data;
-                        char* visible = l->visible ? "❌" : "✅";
-                        char* selected = drawingArea->id_layer == l->id ? "✅" : "❌";
                         char* name = l->name;
                         int id = l->id;
-                        printf("%d\t%s\t%s\t%s\n", id, name, visible, selected);
+                        if (emojiSupported) {
+                            char *visible = l->visible ? "❌" : "✅";
+                            char *selected = drawingArea->id_layer == l->id ? "✅" : "❌";
+                            printf("%d\t%s\t%s\t%s\n", id, name, visible, selected);
+                        }
+                        else {
+                            char *visible = l->visible ? "Non" : "Oui";
+                            char *selected = drawingArea->id_layer == l->id ? "Oui" : "Non";
+                            printf("%d\t%s\t%s\t%s\n", id, name, visible, selected);
+                        }
                         n = n->next;
                     }
                 }
@@ -355,7 +366,12 @@ int main() {
                 break;
         }
         if (error == 1) {
-            printAtCoos(size.width - 1, size.height, "❌");
+            if (emojiSupported) {
+                printAtCoos(size.width - 1, size.height, "❌");
+            }
+            else {
+                printAtCoos(size.width - 1, size.height, "X");
+            }
         }
         execCmd(&error, drawingArea, &MODE, &SUBMODE);
     }
