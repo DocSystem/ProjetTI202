@@ -302,7 +302,15 @@ int main() {
                 // show list
                 if (SUBMODE == 1) {
                     // show list shapes
-
+                    printAtCoos(0, 0, "Shapes:\n");
+                    printf("ID\tShape\n");
+                    lnode* n = access_layer_by_id(drawingArea->list_layers, drawingArea->id_layer)->shapes->head;
+                    while (n != NULL) {
+                        Shape* s = (Shape*) n->data;
+                        printf("%d\t", s->id);
+                        printShape(s);
+                        n = n->next;
+                    }
                 }
                 else if (SUBMODE == 2) {
                     // show list layer
