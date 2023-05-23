@@ -168,6 +168,21 @@ void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
         }
         if (strcmp(command.args[0], "shape") == 0) {
             // delete shape <id>
+            lnode* n1 = area->list_layers->head;
+            while (n1 != NULL) {
+                Layer* l = (Layer*) n1->data;
+                lnode* n2 = l->shapes->head;
+                while (n2 != NULL) {
+                    Shape* s = (Shape*) n2->data;
+                    if (s->id == parseInt(command.args[1])) {
+                        lst_delete_node(l->shapes, n2);
+                        return;
+                    }
+                    n2 = n2->next;
+                }
+                n1 = n1->next;
+            }
+            *error = 1;
         }
         else if (strcmp(command.args[0], "layer") == 0) {
             // delete layer <id>
