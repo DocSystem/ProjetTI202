@@ -4,48 +4,31 @@
 
 #include "utils.h"
 #include <stdio.h>
-#include <time.h>
 #include <string.h>
 #include <stdlib.h>
 
 #if __linux__ || __APPLE__
-
 #include <sys/ioctl.h>
-#include <stdlib.h>
-
 #elif _WIN32
-
 #include <windows.h>
-
 #else
-
 #error "OS not supported"
-
 #endif
 
-void sleep(int seconds) {
-    clock_t end;
-    end = clock() + seconds * CLOCKS_PER_SEC;
-    while (clock() < end) {}
-}
-
 void clearScreen() {
+    // Efface le texte affiché à l'écran et replace le curseur en haut à gauche
     printf("\033[2J");
     printf("\033[0;0H");
 }
 
 void printAtCoos(int x, int y, char *str) {
+    // Affiche le texte <str> aux coordonnées <x>, <y> du terminal
     printf("\033[%d;%dH%s", y, x, str);
-}
-
-char* selectedText(char* text) {
-    char* selected = malloc(sizeof(char) * (strlen(text) + 10));
-    sprintf(selected, "\033[7m%s\033[0m", text);
-    return selected;
 }
 
 #if __linux__ || __APPLE__
 win_size getWindowSize() {
+    // get the size of the terminal window
     win_size size;
     struct winsize w;
     ioctl(0, TIOCGWINSZ, &w);
@@ -55,6 +38,7 @@ win_size getWindowSize() {
 }
 #elif _WIN32
 win_size getWindowSize() {
+    // get the size of the terminal window
     win_size size;
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
@@ -64,6 +48,7 @@ win_size getWindowSize() {
 }
 #else
 win_size getWindowSize() {
+    // returns a size of 0, 0 if there is no way to get terminal size
     win_size size;
     size.width = 0;
     size.height = 0;
@@ -71,24 +56,8 @@ win_size getWindowSize() {
 }
 #endif
 
-void showWindowBox() {
-    win_size size = getWindowSize();
-    clearScreen();
-    for (int i = 1; i <= size.width; i++) {
-        printAtCoos(i, 1, "-");
-    }
-    for (int i = 1; i <= size.height - 3; i++) {
-        printAtCoos(1, i + 1, "|");
-        printAtCoos(size.width, i + 1, "|");
-    }
-    for (int i = 1; i <= size.width; i++) {
-        printAtCoos(i, size.height - 1, "-");
-    }
-    printAtCoos(1, size.height, ">>> ");
-}
-
 void printHelp() {
-    // HEEEEEEEEEEEEEEEEELP ME
+    // Affiche la page d'aide (liste des commandes)
     win_size size = getWindowSize();
     printAtCoos(0, 0, "");
     for (int i = 0; i < size.width / 2 - 11; i++) {
@@ -123,6 +92,7 @@ void printHelp() {
 }
 
 char* waitForCommand() {
+    // Demande à l'utilisateur d'entrer une commande
     char* command = malloc(sizeof(char) * 100);
     printAtCoos(1, getWindowSize().height, ">>> ");
     fgets(command, 100, stdin);
@@ -130,6 +100,7 @@ char* waitForCommand() {
 }
 
 int parseInt(char* str) {
+    // Convertit une chaîne de caractères en entier
     int result = 0;
     for (int i = 0; i < strlen(str); i++) {
         result = result * 10 + (str[i] - '0');
@@ -138,6 +109,7 @@ int parseInt(char* str) {
 }
 
 Command parseCommand(char* cmd) {
+    // Convertit une chaîne de caractères en commande (commande + arguments + nombre d'arguments)
     Command command;
     command.command = malloc(sizeof(char) * 100);
     command.args = malloc(sizeof(char*));
@@ -175,21 +147,4 @@ Command parseCommand(char* cmd) {
         command.args[i] = arg;
     }
     return command;
-}
-
-void showPopup(char* message) {
-    win_size size = getWindowSize();
-    int width = strlen(message) + 9;
-    int height = 4;
-    int x = (size.width - width) / 2;
-    int y = (size.height - height) / 2;
-    for (int i = 0; i <= width; i++) {
-        printAtCoos(x + i, y, "-");
-        printAtCoos(x + i, y + height, "-");
-    }
-    for (int i = 1; i < height; i++) {
-        printAtCoos(x, y + i, "|");
-        printAtCoos(x + width, y + i, "|");
-    }
-    printAtCoos((int)(size.width / 2) - (int)(strlen(message) / 2), y + 2, message);
 }

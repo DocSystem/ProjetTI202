@@ -7,16 +7,14 @@
 #include "layer.h"
 
 void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
-    // split cmd into two variables
-    // first variable is the command
-    // second variable is an array of arguments
+    // Ask user for command, parse it and execute it
     char* cmd = waitForCommand(); // <command> <arg1> <arg2> ...
     Command command = parseCommand(cmd);
     *error = 0;
     if (strcmp(command.command, "clear") == 0) {
+        // clear
         *MODE = -1;
         clearScreen();
-        // clear
     }
     else if (strcmp(command.command, "exit") == 0) {
         // exit
@@ -121,6 +119,7 @@ void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
         add_shape_to_area(area, p);
     }
     else if (strcmp(command.command, "plot") == 0) {
+        // plot
         *MODE = 0;
     }
     else if (strcmp(command.command, "list") == 0) {
@@ -176,6 +175,7 @@ void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
         }
     }
     else if (strcmp(command.command, "erase") == 0) {
+        // erase
         erase_area(area);
     }
     else if (strcmp(command.command, "new") == 0) {
@@ -248,6 +248,7 @@ void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
         }
     }
     else if (strcmp(command.command, "help") == 0) {
+        // help
         *MODE = 2;
     }
     else {
@@ -264,17 +265,6 @@ int main() {
         emojiSupported = 0;
     }
     #endif
-    /*showWindowBox();
-    Point* p = createPoint(10, 2);
-    Point* p2 = createPoint(20, 3);
-    Line* l = createLine(p, p2);
-    printLine(l);
-    freeLine(l);
-    // clearScreen();
-    // sleep(5);
-    scanf("%s");
-    */
-    //showWindowBox();
 
     int MODE = 0;
     int SUBMODE = 0;

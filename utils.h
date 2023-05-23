@@ -5,9 +5,7 @@
 #ifndef PROJETTI202_UTILS_H
 #define PROJETTI202_UTILS_H
 
-void sleep(int seconds);
 void clearScreen();
-char* selectedText(char* text);
 
 typedef struct{
     int width;
@@ -16,7 +14,6 @@ typedef struct{
 
 void printAtCoos(int x, int y, char *str);
 win_size getWindowSize();
-void showWindowBox();
 
 void printHelp();
 
@@ -30,7 +27,5 @@ char* waitForCommand();
 Command parseCommand(char* cmd);
 
 int parseInt(char* str);
-
-void showPopup(char* message);
 
 #endif //PROJETTI202_UTILS_H
