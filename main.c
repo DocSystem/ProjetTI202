@@ -67,7 +67,8 @@ int main() {
     */
     //showWindowBox();
 
-    Area* drawingArea = create_area(10, 10);
+    Area* drawingArea = create_area(100, 100);
+    clear_area(drawingArea);
 
     int error = 0;
 

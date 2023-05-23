@@ -84,8 +84,12 @@ void draw_area(Area* area) {
     }
     lnode* node_pixel = get_first_node(pixels);
     Pixel* pixel = get_data(node_pixel);
+    int x, y;
     while (pixel != NULL) {
-        (area->mat)[pixel->x][pixel->y] = 1;
+        x = pixel->x;
+        y = pixel->y;
+        (area->mat)[x][y] = 1;
+        printf("x: %d, y: %d\n", x, y);
         node_pixel = get_next_node(node_pixel);
         pixel = get_data(node_pixel);
     }
@@ -96,11 +100,11 @@ void draw_area(Area* area) {
 void print_area(Area* area) {
     for (int i = 0; i < area->width; i++) {
         for (int j = 0; j < area->height; j++) {
-            if (area->mat[i][j] == 0) {
-                printf(" ");
+            if (area->mat[i][j] == 1) {
+                printf("X");
                 continue;
             } else {
-                printf("X");
+                printf(" ");
             }
         }
         printf("\n");

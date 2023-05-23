@@ -9,12 +9,13 @@
 #include "geometry.h"
 #include "double_chained_list.h"
 #include "layer.h"
+#include "utils.h"
 
 
 int ActionChoice(Area* area) {
-
+    clearScreen();
     printf("\n");
-    printf("Bienvenue dans le menu principal \n");
+    printf("Menu principal : \n");
     printf("Veuillez choisir une action : \n");
     printf("A- Ajouter une forme \n");
     printf("a- Ajouter un calque \n");
@@ -31,6 +32,7 @@ int ActionChoice(Area* area) {
     printf("G- Quitter \n");
     char choice;
     scanf(" %c", &choice);
+    clearScreen();A
     switch (choice) {
         case 'A': {
 
@@ -159,6 +161,7 @@ int ActionChoice(Area* area) {
 }
 
 Shape* ShapeChoice() {
+    clearScreen();
     printf("Veuillez choisir une forme : \n");
     printf("1- Point \n");
     printf("2- Ligne \n");
@@ -166,9 +169,11 @@ Shape* ShapeChoice() {
     printf("4- Rectangle \n");
     printf("5- Carre \n");
     printf("6- Polygone \n");
-    printf("7- Revenir au menu précédent \n");
+    printf("7- Courbe \n");
+    printf("8- Revenir au menu précédent \n");
     int choice;
     scanf(" %d", &choice);
+    clearScreen();
     switch (choice) {
         case 1: {
             printf("Vous avez choisi de créer un point \n");
@@ -271,9 +276,46 @@ Shape* ShapeChoice() {
             Shape *polygon = createPolygonShape(points, nbPoints);
             return polygon;
         }
-        case 7:
+
+        case 7: {
+            printf("Vous avez choisi de créer une courbe de Bézier \n");
+            printf("Veuillez entrer les coordonnées du point de départ : \n");
+            int x1, y1;
+            printf("x : ");
+            scanf("%d", &x1);
+            printf("y : ");
+            scanf("%d", &y1);
+            Point* p1 = createPoint(x1, y1);
+            printf("Veuillez entrer les coordonnées du point d'arrivée : \n");
+            int x2, y2;
+            printf("x : ");
+            scanf("%d", &x2);
+            printf("y : ");
+            scanf("%d", &y2);
+            Point* p2 = createPoint(x2, y2);
+            printf("Veuillez entrer les coordonnées du premier point de contrôle : \n");
+            int x3, y3;
+            printf("x : ");
+            scanf("%d", &x3);
+            printf("y : ");
+            scanf("%d", &y3);
+            Point* p3 = createPoint(x3, y3);
+            printf("Veuillez entrer les coordonnées du second point de contrôle : \n");
+            int x4, y4;
+            printf("x : ");
+            scanf("%d", &x4);
+            printf("y : ");
+            scanf("%d", &y4);
+            Point* p4 = createPoint(x4, y4);
+            Shape* bezier = createCurveShape(p1, p2, p3, p4);
+            return bezier;
+        }
+
+
+        case 8 : {
             printf("Vous avez choisi de revenir au menu précédent \n");
             return NULL;
+        }
 
         default: {
             printf("Vous n'avez pas choisi une forme valide \n");

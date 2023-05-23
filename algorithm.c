@@ -258,7 +258,7 @@ Point* calc_point_median(Point* p1, Point* p2, double t) {
 }
 
 Point* cj_calc(Point** points, int num_pt, double t) {
-    Point* tmp_pt[num_pt];
+    Point** tmp_pt = malloc(sizeof(Point*) * num_pt);
     for (int i = 0; i < num_pt - 1; i++) {
         tmp_pt[i] = points[i];
     }

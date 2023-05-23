@@ -215,6 +215,7 @@ void freeShape(Shape* shape) {
 }
 
 void printShape(Shape* shape) {
+    printf("Shape %d : ", shape -> id);
     switch (shape -> type) {
         case POINT:
             printPoint(shape -> ptrShape);
@@ -243,7 +244,7 @@ void printShape(Shape* shape) {
 
 
 void addPixel(List* lPixels, Pixel* pixel) {
-    lst_insert_tail(lPixels, pixel);
+    lst_insert_tail(lPixels, lst_create_node(pixel));
 }
 
 Pixel* createPixel(int x, int y) {
@@ -326,26 +327,40 @@ void drawCurve(Curve* curve, List* pixels) {
 void drawShape(Shape* shape, List* pixels) {
     // Equivalent à create_shape_to_pixel mais plus logique car on ajoute direct les pixels à la liste pixel
     switch (shape -> type) {
-        case POINT:
-            drawPoint(shape -> ptrShape, pixels);
+        case POINT: {
+            drawPoint(shape->ptrShape, pixels);
+            printf("Point drawn\n");
             break;
-        case LINE:
-            drawLine(shape -> ptrShape, pixels);
+        }
+        case LINE: {
+            drawLine(shape->ptrShape, pixels);
+            printf("Line drawn\n");
             break;
-        case CIRCLE:
-            drawCircle(shape -> ptrShape, pixels);
+        }
+        case CIRCLE: {
+            drawCircle(shape->ptrShape, pixels);
+            printf("Circle drawn\n");
             break;
-        case RECTANGLE:
-            drawRectangle(shape -> ptrShape, pixels);
+        }
+        case RECTANGLE: {
+            drawRectangle(shape->ptrShape, pixels);
+            printf("Rectangle drawn\n");
             break;
-        case SQUARE:
-            drawSquare(shape -> ptrShape, pixels);
+        }
+        case SQUARE: {
+            drawSquare(shape->ptrShape, pixels);
+            printf("Square drawn\n");
             break;
-        case POLYGON:
-            drawPolygon(shape -> ptrShape, pixels);
+        }
+        case POLYGON: {
+            drawPolygon(shape->ptrShape, pixels);
+            printf("Polygon drawn\n");
             break;
-        case CURVE:
-            drawCurve(shape -> ptrShape, pixels);
+        }
+        case CURVE: {
+            drawCurve(shape->ptrShape, pixels);
+            printf("Curve drawn\n");
             break;
+        }
     }
 }
