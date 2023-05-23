@@ -161,6 +161,10 @@ void execCmd(int* error, Area* area, int* MODE) {
 }
 
 int main() {
+    #if WIN32
+    // Allow emojis on Windows
+    system("chcp 65001");
+    #endif
     /*showWindowBox();
     Point* p = createPoint(10, 2);
     Point* p2 = createPoint(20, 3);
