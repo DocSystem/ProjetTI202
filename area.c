@@ -9,6 +9,7 @@
 #include "area.h"
 #include "double_chained_list.h"
 #include "layer.h"
+#include "utils.h"
 
 Area* create_area(unsigned int width, unsigned int height) {
     /* Fonction qui crée une zone de dessin de taille width * height
@@ -110,7 +111,7 @@ void draw_area(Area* area) {
         x = pixel->x;
         y = pixel->y;
         (area->mat)[x][y] = 1;
-        printf("x: %d, y: %d\n", x, y);
+        // printf("x: %d, y: %d\n", x, y);
         node_pixel = get_next_node(node_pixel);
         pixel = get_data(node_pixel);
     }
@@ -125,9 +126,10 @@ void print_area(Area* area) {
         for (int j = 0; j < area->height; j++) {
             if (area->mat[i][j] == 1) {
                 printf("X ");
+                printAtCoos(i*2 + 1, j + 1, "X");
                 continue;
             } else {
-                printf("  ");
+                printAtCoos(i*2 + 1, j + 1, " ");
             }
         }
         printf("\n");
