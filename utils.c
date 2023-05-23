@@ -2,16 +2,26 @@
 // Created by antoine7805 on 15/03/2023.
 //
 
+#include "utils.h"
 #include <stdio.h>
 #include <time.h>
-#if defined(__unix__) || defined(__APPLE__)
+#include <string.h>
+#include <stdlib.h>
+
+#if __linux__ || __APPLE__
+
 #include <sys/ioctl.h>
-#elif defined(_WIN32) || defined(WIN32)
+#include <stdlib.h>
+
+#elif _WIN32
+
 #include <windows.h>
+
 #else
+
 #error "OS not supported"
+
 #endif
-#include "utils.h"
 
 void sleep(int seconds) {
     clock_t end;
@@ -28,7 +38,13 @@ void printAtCoos(int x, int y, char *str) {
     printf("\033[%d;%dH%s", y, x, str);
 }
 
-#if defined(__unix__) || defined(__APPLE__)
+char* selectedText(char* text) {
+    char* selected = malloc(sizeof(char) * (strlen(text) + 10));
+    sprintf(selected, "\033[7m%s\033[0m", text);
+    return selected;
+}
+
+#if __linux__ || __APPLE__
 win_size getWindowSize() {
     win_size size;
     struct winsize w;
@@ -37,7 +53,7 @@ win_size getWindowSize() {
     size.height = w.ws_row;
     return size;
 }
-#elif defined(_WIN32) || defined(WIN32)
+#elif _WIN32
 win_size getWindowSize() {
     win_size size;
     CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -57,19 +73,86 @@ win_size getWindowSize() {
 
 void showWindowBox() {
     win_size size = getWindowSize();
-    for (int i = 0; i < size.width; i++) {
-        printf("-");
+    clearScreen();
+    for (int i = 1; i <= size.width; i++) {
+        printAtCoos(i, 1, "-");
     }
-    printf("\n");
-    for (int i = 0; i < size.height - 2; i++) {
-        printf("|");
-        for (int j = 0; j < size.width - 2; j++) {
-            printf(" ");
+    for (int i = 1; i <= size.height - 3; i++) {
+        printAtCoos(1, i + 1, "|");
+        printAtCoos(size.width, i + 1, "|");
+    }
+    for (int i = 1; i <= size.width; i++) {
+        printAtCoos(i, size.height - 1, "-");
+    }
+    printAtCoos(1, size.height, ">>> ");
+}
+
+char* waitForCommand() {
+    char* command = malloc(sizeof(char) * 100);
+    printAtCoos(1, getWindowSize().height, ">>> ");
+    fgets(command, 100, stdin);
+    return command;
+}
+
+int parseInt(char* str) {
+    int result = 0;
+    for (int i = 0; i < strlen(str); i++) {
+        result = result * 10 + (str[i] - '0');
+    }
+    return result;
+}
+
+Command parseCommand(char* cmd) {
+    Command command;
+    command.command = malloc(sizeof(char) * 100);
+    command.args = malloc(sizeof(char*));
+    int arg_count = 0;
+    int cmd_length = 0;
+    while (cmd[cmd_length] != ' ' && cmd[cmd_length] != '\0' && cmd[cmd_length] != '\n') {
+        command.command[cmd_length] = cmd[cmd_length];
+        cmd_length++;
+    }
+    if (cmd[cmd_length] == '\0' || cmd[cmd_length] == '\n') {
+        command.arg_count = 0;
+        return command;
+    }
+    for (int i = 0; i < strlen(cmd); i++) {
+        if (cmd[i] == ' ') {
+            arg_count++;
         }
-        printf("|\n");
     }
-    for (int i = 0; i < size.width; i++) {
-        printf("-");
+    command.arg_count = arg_count;
+    for (int i = 0; i < arg_count; i++) {
+        char* arg = malloc(sizeof(char) * 100);
+        int space_count = 0;
+        int arg_length = 0;
+        for (int j = 0; j < strlen(cmd); j++) {
+            if (cmd[j] == ' ' || cmd[j] == '\n') {
+                space_count++;
+            }
+            if (space_count == i + 1 && cmd[j] != ' ') {
+                arg[arg_length] = cmd[j];
+                arg_length++;
+            }
+        }
+        command.args[i] = arg;
     }
-    printf("\n");
+    return command;
+}
+
+void showPopup(char* message) {
+    win_size size = getWindowSize();
+    int width = strlen(message) + 9;
+    int height = 4;
+    int x = (size.width - width) / 2;
+    int y = (size.height - height) / 2;
+    for (int i = 0; i <= width; i++) {
+        printAtCoos(x + i, y, "-");
+        printAtCoos(x + i, y + height, "-");
+    }
+    for (int i = 1; i < height; i++) {
+        printAtCoos(x, y + i, "|");
+        printAtCoos(x + width, y + i, "|");
+    }
+    printAtCoos((int)(size.width / 2) - (int)(strlen(message) / 2), y + 2, message);
 }
