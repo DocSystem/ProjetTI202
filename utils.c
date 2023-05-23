@@ -118,7 +118,7 @@ void printHelp() {
     printf("\tnew layer <name> : Ajoute un calque de nom <name>\n");
     printf("\tlayer <id> : Sélectionne le calque <id>\n");
     printf("\tdelete layer <id> : Supprime le calque <id>\n");
-    printf("\tset layer visible <id> : Rend le calque <id> visible\n");
+    printf("\tset layer show <id> : Rend le calque <id> visible\n");
     printf("\tset layer hide <id> : Rend le calque <id> invisible\n");
 }
 

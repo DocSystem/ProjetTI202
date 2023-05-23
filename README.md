@@ -36,6 +36,6 @@ Un éditeur d'images vectorielles dans le terminal.
 |          `new layer [name]`          |                                            Créer un nouveau calque de nom `name`                                             |
 |             `layer [id]`             |                                            Aller sur le calque d'identifiant `ìd`                                            |
 |         `delete layer [id]`          |                                            Supprimer le calque d'identifiant `id`                                            |
-|       `set layer visible [id]`       |                                         Rendre le calque d'identifiant `id` visible                                          |
+|        `set layer show [id]`         |                                         Rendre le calque d'identifiant `id` visible                                          |
 |        `set layer hide [id]`         |                                        Rendre le calque d'identifiant `id` invisible                                         |
 

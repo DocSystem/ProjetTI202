@@ -235,7 +235,7 @@ void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
                 *error = 1;
                 return;
             }
-            if (strcmp(command.args[1], "visible") == 0) {
+            if (strcmp(command.args[1], "show") == 0) {
                 set_layer_visible(l);
             }
             else if (strcmp(command.args[1], "hide") == 0) {
