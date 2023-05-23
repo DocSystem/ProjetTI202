@@ -246,7 +246,7 @@ void freeShape(Shape* shape) {
 
 void printShape(Shape* shape) {
     /* Affichage d'une Shape sous la forme de texte */
-    printf("Shape %d : ", shape -> id);
+    // printf("Shape %d : ", shape -> id);
     switch (shape -> type) {
         case POINT:
             printPoint(shape -> ptrShape);
@@ -370,37 +370,37 @@ void drawShape(Shape* shape, List* pixels) {
     switch (shape -> type) {
         case POINT: {
             drawPoint(shape->ptrShape, pixels);
-            printf("Point drawn\n");
+            // printf("Point drawn\n");
             break;
         }
         case LINE: {
             drawLine(shape->ptrShape, pixels);
-            printf("Line drawn\n");
+            // printf("Line drawn\n");
             break;
         }
         case CIRCLE: {
             drawCircle(shape->ptrShape, pixels);
-            printf("Circle drawn\n");
+            // printf("Circle drawn\n");
             break;
         }
         case RECTANGLE: {
             drawRectangle(shape->ptrShape, pixels);
-            printf("Rectangle drawn\n");
+            // printf("Rectangle drawn\n");
             break;
         }
         case SQUARE: {
             drawSquare(shape->ptrShape, pixels);
-            printf("Square drawn\n");
+            // printf("Square drawn\n");
             break;
         }
         case POLYGON: {
             drawPolygon(shape->ptrShape, pixels);
-            printf("Polygon drawn\n");
+            // printf("Polygon drawn\n");
             break;
         }
         case CURVE: {
             drawCurve(shape->ptrShape, pixels);
-            printf("Curve drawn\n");
+            // printf("Curve drawn\n");
             break;
         }
     }
