@@ -43,9 +43,9 @@ Un éditeur d'images vectorielles dans le terminal.
 
 ### Depuis GitHub Actions
 
-* [Linux](https://nightly.link/DocSystem/ScribbleVibes/workflows/cmake-ubuntu/main/ScribbleVibes)
-* [macOS](https://nightly.link/DocSystem/ScribbleVibes/workflows/cmake-macos/main/ScribbleVibes)
-* [Windows](https://nightly.link/DocSystem/ScribbleVibes/workflows/cmake-windows/main/ScribbleVibes)
+* [Linux](https://nightly.link/DocSystem/ScribbleVibes/workflows/cmake-ubuntu/main/ScribbleVibes.zip)
+* [macOS](https://nightly.link/DocSystem/ScribbleVibes/workflows/cmake-macos/main/ScribbleVibes.zip)
+* [Windows](https://nightly.link/DocSystem/ScribbleVibes/workflows/cmake-windows/main/ScribbleVibes.zip)
 
 ### Depuis le code source
 
