@@ -104,6 +104,9 @@ void printHelp() {
     printf("\tclear : Efface l'écran\n");
     printf("\tplot : Affiche l'image\n");
     printf("Formes :\n");
+    printf("\tlist shapes : Liste les formes placées\n");
+    printf("\tdelete shape <id> : Supprime la forme <id>\n");
+    printf("\terase : Supprime toutes les formes du calque actif\n");
     printf("\tpoint <y> <y> : Ajoute un point\n");
     printf("\tline <x1> <y1> <x2> <y2> : Ajoute une ligne\n");
     printf("\tcircle <x> <y> <radius> : Ajoute un cercle\n");
