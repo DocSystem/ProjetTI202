@@ -87,6 +87,38 @@ void showWindowBox() {
     printAtCoos(1, size.height, ">>> ");
 }
 
+void printHelp() {
+    // HEEEEEEEEEEEEEEEEELP ME
+    win_size size = getWindowSize();
+    printAtCoos(0, 0, "");
+    for (int i = 0; i < size.width / 2 - 11; i++) {
+        printf("=");
+    }
+    printf(" Liste des commandes ");
+    for (int i = 0; i < size.width / 2 - 11; i++) {
+        printf("=");
+    }
+    printf("\nCommandes de base :\n");
+    printf("\thelp : Affiche la liste des commandes\n");
+    printf("\texit : Quitte le programme\n");
+    printf("\tclear : Efface l'écran\n");
+    printf("\tplot : Affiche l'image\n");
+    printf("Formes :\n");
+    printf("\tpoint <y> <y> : Ajoute un point\n");
+    printf("\tline <x1> <y1> <x2> <y2> : Ajoute une ligne\n");
+    printf("\tcircle <x> <y> <radius> : Ajoute un cercle\n");
+    printf("\tsquare <x> <y> <size> : Ajoute un carré\n");
+    printf("\trectangle <x> <y> <width> <height> : Ajoute un rectangle\n");
+    printf("\tpolygon <x1> <y1> <x2> <y2> ... <xn> <yn> : Ajoute un polygone\n");
+    printf("Calques :\n");
+    printf("\tlist layer : Liste les calques\n");
+    printf("\tnew layer <name> : Ajoute un calque de nom <name>\n");
+    printf("\tlayer <id> : Sélectionne le calque <id>\n");
+    printf("\tdelete layer <id> : Supprime le calque <id>\n");
+    printf("\tset layer visible <id> : Rend le calque <id> visible\n");
+    printf("\tset layer hide <id> : Rend le calque <id> invisible\n");
+}
+
 char* waitForCommand() {
     char* command = malloc(sizeof(char) * 100);
     printAtCoos(1, getWindowSize().height, ">>> ");

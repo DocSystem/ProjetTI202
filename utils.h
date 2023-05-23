@@ -18,6 +18,8 @@ void printAtCoos(int x, int y, char *str);
 win_size getWindowSize();
 void showWindowBox();
 
+void printHelp();
+
 typedef struct {
     char* command;
     char** args;
