@@ -44,10 +44,6 @@ void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
         int y1 = parseInt(command.args[1]);
         int x2 = parseInt(command.args[2]);
         int y2 = parseInt(command.args[3]);
-        if (x1 < 0 || x1 >= area->width - 1 || x2 < 0 || x2 >= area->width - 1 || y1 < 0 || y1 >= area->height - 2 || y2 < 0 || y2 >= area->height - 2) {
-            *error = 1;
-            return;
-        }
         Point* p1 = createPoint(x1, y1);
         Point* p2 = createPoint(x2, y2);
         Shape* l = createLineShape(p1, p2);
@@ -63,10 +59,7 @@ void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
         int x = parseInt(command.args[0]);
         int y = parseInt(command.args[1]);
         int radius = parseInt(command.args[2]);
-        if (x < 0 || x >= area->width - 1 || y < 0 || y >= area->height - 2) {
-            *error = 1;
-            return;
-        }
+
         Point* p = createPoint(x, y);
         Shape* c = createCircleShape(p, radius);
         // add circle to area
@@ -81,10 +74,7 @@ void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
         int x = parseInt(command.args[0]);
         int y = parseInt(command.args[1]);
         int length = parseInt(command.args[2]);
-        if (x < 0 || x >= area->width - 1 || y < 0 || y >= area->height - 2) {
-            *error = 1;
-            return;
-        }
+
         Point* p = createPoint(x, y);
         Shape* s = createSquareShape(p, length);
         // add square to area
@@ -100,10 +90,7 @@ void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
         int y = parseInt(command.args[1]);
         int width = parseInt(command.args[2]);
         int height = parseInt(command.args[3]);
-        if (x < 0 || x >= area->width - 1 || y < 0 || y >= area->height - 2) {
-            *error = 1;
-            return;
-        }
+
         Point* p = createPoint(x, y);
         Shape* r = createRectangleShape(p, width, height);
         // add rectangle to area
@@ -123,12 +110,6 @@ void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
             }
             else {
                 y[i / 2] = parseInt(command.args[i]);
-            }
-        }
-        for (int i = 0; i < command.arg_count / 2; i++) {
-            if (x[i] < 0 || x[i] >= area->width - 1 || y[i] < 0 || y[i] >= area->height - 2) {
-                *error = 1;
-                return;
             }
         }
         Point** points = malloc(sizeof(Point*) * command.arg_count / 2);
@@ -303,6 +284,13 @@ int main() {
 
     clearScreen();
     while (1) {
+        size = getWindowSize();
+        if (size.width != drawingArea->width || size.height != drawingArea->height) {
+            // window size changed
+            drawingArea->width = size.width;
+            drawingArea->height = size.height - 1;
+
+        }
         // showWindowBox();
         // render shapes
         clearScreen();

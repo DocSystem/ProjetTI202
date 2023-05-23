@@ -243,7 +243,7 @@ void traceCircle(Circle* circle, List* pixel) {
         } else if (d < 2 * (r - y)) {
             d += 2 * y-- - 1;
         } else {
-            d += (y-- - x-- - 1);
+            d += 2*(y-- - x++ - 1);
         }
     }
 }
