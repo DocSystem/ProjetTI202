@@ -8,7 +8,7 @@
 Un éditeur d'images vectorielles dans le terminal.
 
 ## Membres du groupe
- - [Valentin GOURJON](https:/github.com/GourjonValentin)
+ - [Valentin GOURJON](https://github.com/GourjonValentin)
  - [Antoine SOUBEN-FINK](https://github.com/DocSystem)
 
 ## Commandes disponibles 
