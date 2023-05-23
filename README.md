@@ -18,6 +18,7 @@ Un éditeur d'images vectorielles dans le terminal.
 |:------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------:|
 |                `help`                |                                                       Afficher l'aide                                                        |
 |               `clear`                |                                                       Effacer l'écran                                                        |
+|                `draw`                |                                                      Dessine les formes                                                      |
 |                `plot`                |                                                       Afficher l'image                                                       |
 |                `exit`                |                                                     Quitter le programme                                                     |
 |               *Formes*               |                                                                                                                              |

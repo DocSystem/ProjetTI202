@@ -251,6 +251,9 @@ void traceCircle(Circle* circle, List* pixel) {
 // ALGORITHME DE CASTELJAU
 
 Point* calc_point_median(Point* p1, Point* p2, double t) {
+    // Calcule le point médian entre deux points
+    // Fonction utilisée dans l'algorithme de Casteljau
+    // Donnée dans le guide du projet en Algorithmique
     double x = (1 - t) * p1 -> x + t * p2 -> x;
     double y = (1 - t) * p1 -> y + t * p2 -> y;
     Point* p = createPoint((int) x, (int) y);
@@ -258,6 +261,9 @@ Point* calc_point_median(Point* p1, Point* p2, double t) {
 }
 
 Point* cj_calc(Point** points, int num_pt, double t) {
+    // Calcule le point de la courbe de Bézier à l'aide de l'algorithme de Casteljau
+    // Fonction utilisée dans l'algorithme de Casteljau
+    // Donnée dans le guide du projet en Algorithmique
     Point** tmp_pt = malloc(sizeof(Point*) * num_pt);
     for (int i = 0; i < num_pt - 1; i++) {
         tmp_pt[i] = points[i];
