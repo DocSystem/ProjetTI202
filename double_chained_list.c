@@ -153,6 +153,7 @@ lnode* get_node_by_index(List *list, int index) {
 }
 
 void* get_data(lnode* node) {
+    // Récupération des données du noeud
     if (node == NULL) {
         return NULL;
     }

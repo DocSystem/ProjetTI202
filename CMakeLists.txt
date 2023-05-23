@@ -10,8 +10,6 @@ add_executable(ProjetTI202
         algorithm.h
         area.c
         area.h
-        chained_list.c
-        chained_list.h
         double_chained_list.c
         double_chained_list.h
         geometry.c

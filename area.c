@@ -11,6 +11,10 @@
 #include "layer.h"
 
 Area* create_area(unsigned int width, unsigned int height) {
+    /* Fonction qui crée une zone de dessin de taille width * height
+     * en utilisant la structure Area
+     * et qui renvoie un pointeur vers cette zone
+     */
     Area* area = malloc(sizeof(Area));
     area->width = width;
     area->height = height;
@@ -28,6 +32,9 @@ Area* create_area(unsigned int width, unsigned int height) {
 
 
 void add_shape_to_area(Area* area, Shape* shape) {
+    /* Fonction qui ajoute une forme à la zone de dessin
+     * en utilisant la structure Area
+     */
     Layer* current_layer = access_layer_by_id(area->list_layers, area->id_layer);
     if (current_layer == NULL) {
         printf("Error: Layer not found");
@@ -37,6 +44,9 @@ void add_shape_to_area(Area* area, Shape* shape) {
 }
 
 void clear_area(Area* area) {
+    /* Fonction qui efface la zone de dessin
+     * de la structure Area
+     */
     // Reset la matrice avec des 0
     for (int i = 0; i < area->width; ++i) {
         for (int j = 0; j < area->height; ++j) {
@@ -46,6 +56,10 @@ void clear_area(Area* area) {
 }
 
 void erase_area(Area* area) {
+    /* Fonction qui supprime les formes
+     * du calque actif de la zone de dessin
+     * de la structure Area
+     */
     // Reset la matrice avec des 0
      clear_area(area);
     // Reset le tableau des formes
@@ -56,6 +70,9 @@ void erase_area(Area* area) {
 }
 
 void delete_area(Area* area) {
+    /* Fonction qui supprime la zone de dessin
+     * de la structure Area
+     */
     erase_area(area);
     for (int i = 0; i < area->width; ++i) {
         free(area->mat[i]);
@@ -66,6 +83,10 @@ void delete_area(Area* area) {
 }
 
 void draw_area(Area* area) {
+    /* Fonction qui dessine la zone de dessin
+     * de la structure Area
+     */
+    clear_area(area);
     List* pixels = lst_create_list();
     lnode* node = get_first_node(area->list_layers);
     Layer* layer = get_data(node);
@@ -96,15 +117,17 @@ void draw_area(Area* area) {
 }
 
 
-
 void print_area(Area* area) {
+    /* Fonction qui affiche la zone de dessin
+     * de la structure Area
+     */
     for (int i = 0; i < area->width; i++) {
         for (int j = 0; j < area->height; j++) {
             if (area->mat[i][j] == 1) {
-                printf("X");
+                printf("X ");
                 continue;
             } else {
-                printf(" ");
+                printf("  ");
             }
         }
         printf("\n");

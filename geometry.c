@@ -10,6 +10,7 @@
 
 
 Point* createPoint(int x, int y) {
+    /* Création d'un point */
     Point* point = malloc(sizeof(Point));
     point -> x = x;
     point -> y = y;
@@ -17,15 +18,18 @@ Point* createPoint(int x, int y) {
 }
 
 void freePoint(Point* point) {
+    /* Libération de la mémoire */
     free(point);
 }
 
 void printPoint(Point* point) {
+    /* Affichage d'un point sous la forme de texte*/
     printf("Point (%d, %d)\n", point -> x, point -> y);
 }
 
 
 Line* createLine(Point* p1, Point* p2) {
+    /* Création d'une ligne */
     Line* line = malloc(sizeof(Line));
     line -> p1 = p1;
     line -> p2 = p2;
@@ -33,16 +37,19 @@ Line* createLine(Point* p1, Point* p2) {
 }
 
 void freeLine(Line* line){
+    /* Libération de la mémoire */
     free(line);
 }
 
 void printLine(Line* line) {
+    /* Affichage d'une ligne sous la forme de texte */
     printf("Line (%d, %d) -> (%d, %d)\n", line -> p1 -> x, line -> p1 -> y, line -> p2 -> x, line -> p2 -> y);
 }
 
 
 
 Circle* createCircle(Point* center, int radius) {
+    /* Création d'un cercle */
     Circle* circle = malloc(sizeof(Circle));
     circle -> center = center;
     circle -> radius = radius;
@@ -50,16 +57,19 @@ Circle* createCircle(Point* center, int radius) {
 }
 
 void freeCircle(Circle* circle) {
+    /* Libération de la mémoire */
     free(circle);
 }
 
 void printCircle(Circle* circle) {
+    /* Affichage d'un cercle sous la forme de texte */
     printf("Circle (%d, %d) with radius %d\n", circle -> center -> x, circle -> center -> y, circle -> radius);
 }
 
 
 
 Rectangle* createRectangle(Point* p, int width, int height) {
+    /* Création d'un rectangle */
     Rectangle* rectangle = malloc(sizeof(Rectangle));
     rectangle -> p = p;
     rectangle -> width = width;
@@ -68,16 +78,19 @@ Rectangle* createRectangle(Point* p, int width, int height) {
 }
 
 void freeRectangle(Rectangle* rectangle) {
+    /* Libération de la mémoire */
     free(rectangle);
 }
 
 void printRectangle(Rectangle* rectangle) {
+    /* Affichage d'un rectangle sous la forme de texte */
     printf("Rectangle (%d, %d) with width %d and height %d\n", rectangle -> p -> x, rectangle -> p -> y, rectangle -> width, rectangle -> height);
 }
 
 
 
 Square* createSquare(Point* p, int side) {
+    /* Création d'un carré */
     Square* square = malloc(sizeof(Square));
     square -> p = p;
     square -> side = side;
@@ -85,16 +98,19 @@ Square* createSquare(Point* p, int side) {
 }
 
 void freeSquare(Square* square) {
+    /* Libération de la mémoire */
     free(square);
 }
 
 void printSquare(Square* square) {
+    /* Affichage d'un carré sous la forme de texte */
     printf("Square (%d, %d) with side %d\n", square -> p -> x, square -> p -> y, square -> side);
 }
 
 
 
 Polygon* createPolygon(Point** points, int nbPoints) {
+    /* Création d'un polygone */
     Polygon* polygon = malloc(sizeof(Polygon));
     polygon -> points = points;
     polygon -> nbPoints = nbPoints;
@@ -102,10 +118,12 @@ Polygon* createPolygon(Point** points, int nbPoints) {
 }
 
 void freePolygon(Polygon* polygon) {
+    /* Libération de la mémoire */
     free(polygon);
 }
 
 void printPolygon(Polygon* polygon) {
+    /* Affichage d'un polygone sous la forme de texte */
     printf("Polygon with %d points\n", polygon -> nbPoints);
     for (int i = 0; i < polygon -> nbPoints; i++) {
         printPoint(polygon -> points[i]);
@@ -113,6 +131,7 @@ void printPolygon(Polygon* polygon) {
 }
 
 Curve* createCurve(Point* p1, Point* p2, Point* p3, Point* p4) {
+    // Création d'une courbe de Bézier
     Curve* curve = malloc(sizeof(Curve));
     curve -> p1 = p1;
     curve -> p2 = p2;
@@ -122,16 +141,19 @@ Curve* createCurve(Point* p1, Point* p2, Point* p3, Point* p4) {
 }
 
 void freeCurve(Curve* curve) {
+    // Libération de la mémoire
     free(curve);
 }
 
 void printCurve(Curve* curve) {
+    // Affichage d'une courbe de Bézier sous la forme de texte
     printf("Curve (%d, %d) -> (%d, %d) -> (%d, %d) -> (%d, %d)\n", curve -> p1 -> x, curve -> p1 -> y, curve -> p2 -> x, curve -> p2 -> y, curve -> p3 -> x, curve -> p3 -> y, curve -> p4 -> x, curve -> p4 -> y);
 }
 
 
 
 Shape* createEmptyShape(ShapeType type) {
+    // Création d'une forme vide
     Shape* shape = malloc(sizeof(Shape));
     // Valeur par défault
     shape -> ptrShape = NULL;
@@ -142,6 +164,7 @@ Shape* createEmptyShape(ShapeType type) {
 }
 
 Shape* createPointShape(int x, int y) {
+    /* Création d'une Shape contenant un point */
     Shape* shape = createEmptyShape(POINT);
     Point* point = createPoint(x, y);
     shape -> ptrShape = (Point*) point;
@@ -149,6 +172,7 @@ Shape* createPointShape(int x, int y) {
 }
 
 Shape* createLineShape(Point* p1, Point* p2) {
+    /* Création d'une Shape contenant une ligne */
     Shape* shape = createEmptyShape(LINE);
     Line* line = createLine(p1, p2);
     shape -> ptrShape = line;
@@ -156,6 +180,7 @@ Shape* createLineShape(Point* p1, Point* p2) {
 }
 
 Shape* createCircleShape(Point* center, int radius) {
+    /* Création d'une Shape contenant un cercle */
     Shape* shape = createEmptyShape(CIRCLE);
     Circle* circle = createCircle(center, radius);
     shape -> ptrShape = circle;
@@ -163,6 +188,7 @@ Shape* createCircleShape(Point* center, int radius) {
 }
 
 Shape* createRectangleShape(Point* p, int width, int height) {
+    /* Création d'une Shape contenant un rectangle */
     Shape* shape = createEmptyShape(RECTANGLE);
     Rectangle* rectangle = createRectangle(p, width, height);
     shape -> ptrShape = rectangle;
@@ -170,6 +196,7 @@ Shape* createRectangleShape(Point* p, int width, int height) {
 }
 
 Shape* createSquareShape(Point* p, int side) {
+    /* Création d'une Shape contenant un carré */
     Shape* shape = createEmptyShape(SQUARE);
     Square* square = createSquare(p, side);
     shape -> ptrShape = square;
@@ -177,6 +204,7 @@ Shape* createSquareShape(Point* p, int side) {
 }
 
 Shape* createPolygonShape(Point** points, int nbPoints) {
+    /* Création d'une Shape contenant un polygone */
     Shape* shape = createEmptyShape(POLYGON);
     Polygon* polygon = createPolygon(points, nbPoints);
     shape -> ptrShape = polygon;
@@ -184,6 +212,7 @@ Shape* createPolygonShape(Point** points, int nbPoints) {
 }
 
 Shape* createCurveShape(Point* p1, Point* p2, Point* p3, Point* p4) {
+    /* Création d'une Shape contenant une courbe de Bézier */
     Shape* shape = createEmptyShape(CURVE);
     Curve* curve = createCurve(p1, p2, p3, p4);
     shape -> ptrShape = curve;
@@ -191,6 +220,7 @@ Shape* createCurveShape(Point* p1, Point* p2, Point* p3, Point* p4) {
 }
 
 void freeShape(Shape* shape) {
+    /* Libération de la mémoire */
     switch (shape -> type) {
         case POINT:
             freePoint(shape -> ptrShape);
@@ -215,6 +245,7 @@ void freeShape(Shape* shape) {
 }
 
 void printShape(Shape* shape) {
+    /* Affichage d'une Shape sous la forme de texte */
     printf("Shape %d : ", shape -> id);
     switch (shape -> type) {
         case POINT:
@@ -244,10 +275,12 @@ void printShape(Shape* shape) {
 
 
 void addPixel(List* lPixels, Pixel* pixel) {
+    // Ajout d'un pixel à la liste de pixels
     lst_insert_tail(lPixels, lst_create_node(pixel));
 }
 
 Pixel* createPixel(int x, int y) {
+    // Création d'un pixel
     Pixel* pixel = malloc(sizeof(Pixel));
     pixel->x = x;
     pixel->y = y;
@@ -255,23 +288,28 @@ Pixel* createPixel(int x, int y) {
 }
 
 void deletePixel(Pixel* pixel) {
+    // Libération de la mémoire
     free(pixel);
 }
 
 void drawPoint(Point* point, List* pixels) {
+    // Ajout du pixel correspondant au point
     addPixel(pixels, createPixel(point -> x, point -> y));
 
 }
 
 void drawLine(Line* line, List* pixels) {
+    // Tracé de la ligne
     traceLine(line, pixels);
 }
 
 void drawCircle(Circle* circle, List* pixels) {
+    // Tracé du cercle
     traceCircle(circle, pixels);
 }
 
 void drawRectangle(Rectangle* rectangle, List* pixels) {
+    // Tracé du rectangle
     // Initialization of the 4 points of the rectangle
     Point* corner0 = createPoint(rectangle -> p -> x, rectangle -> p -> y);
     Point* corner1 = createPoint(rectangle -> p -> x + rectangle -> width, rectangle -> p -> y);
@@ -300,12 +338,14 @@ void drawRectangle(Rectangle* rectangle, List* pixels) {
 }
 
 void drawSquare(Square* square, List* pixels) {
+    // Tracé du carré
     Rectangle* rectangle = createRectangle(square -> p, square -> side, square -> side);
     drawRectangle(rectangle, pixels);
     freeRectangle(rectangle);
 }
 
 void drawPolygon(Polygon* polygon, List* pixels) {
+    // Tracé du polygone
     int i;
     // Trace the lines of the polygon
     for (i = 0; i < polygon->nbPoints; i++) {
@@ -325,6 +365,7 @@ void drawCurve(Curve* curve, List* pixels) {
 }
 
 void drawShape(Shape* shape, List* pixels) {
+    // Tracé d'une Shape quelconque (point, ligne, cercle, rectangle, carré, polygone, courbe)
     // Equivalent à create_shape_to_pixel mais plus logique car on ajoute direct les pixels à la liste pixel
     switch (shape -> type) {
         case POINT: {
