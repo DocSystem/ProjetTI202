@@ -112,6 +112,7 @@ Command parseCommand(char* cmd) {
         command.command[cmd_length] = cmd[cmd_length];
         cmd_length++;
     }
+    command.command[cmd_length] = '\0';
     if (cmd[cmd_length] == '\0' || cmd[cmd_length] == '\n') {
         command.arg_count = 0;
         return command;
@@ -135,6 +136,7 @@ Command parseCommand(char* cmd) {
                 arg_length++;
             }
         }
+        arg[arg_length] = '\0';
         command.args[i] = arg;
     }
     return command;
