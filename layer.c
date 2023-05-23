@@ -47,6 +47,9 @@ void remove_layer_from_list(List* layer_list, Layer* layer) {
         if (((Layer*) node->data)->id != layer->id) {
             node = node->next;
         }
+        else {
+            break;
+        }
     } if (node != NULL) {
         lst_delete_node(layer_list, node);
     }

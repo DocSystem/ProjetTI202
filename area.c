@@ -103,6 +103,10 @@ void draw_area(Area* area) {
             node = get_next_node(node);
             layer = get_data(node);
         }
+        else {
+            node = get_next_node(node);
+            layer = get_data(node);
+        }
     }
     lnode* node_pixel = get_first_node(pixels);
     Pixel* pixel = get_data(node_pixel);
@@ -125,7 +129,6 @@ void print_area(Area* area) {
     for (int i = 0; i < area->width; i++) {
         for (int j = 0; j < area->height; j++) {
             if (area->mat[i][j] == 1) {
-                printf("X ");
                 printAtCoos(i*2 + 1, j + 1, "X");
                 continue;
             } else {
