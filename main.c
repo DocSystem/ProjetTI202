@@ -282,13 +282,6 @@ int main() {
 
     clearScreen();
     while (1) {
-        size = getWindowSize();
-        if (size.width != drawingArea->width || size.height != drawingArea->height) {
-            // window size changed
-            drawingArea->width = size.width;
-            drawingArea->height = size.height - 1;
-
-        }
         // showWindowBox();
         // render shapes
         clearScreen();
