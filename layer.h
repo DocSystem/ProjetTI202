@@ -28,7 +28,7 @@ void remove_layer_from_list(List* layer_list, Layer* layer);
 void set_layer_visible(Layer* layer);
 void set_layer_invisible(Layer* layer);
 void add_shape_to_layer(Layer* layer, Shape* shape);
-void remove_shape_to_layer(Layer* layer, Shape* shape);
+void remove_shape_from_layer(Layer* layer, Shape* shape);
 
 Layer* access_layer_by_id(List* layer_list, unsigned int id_layer);
 

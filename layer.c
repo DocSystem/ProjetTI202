@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include "layer.h"
 #include "id.h"
+#include "utils.h"
 
 
 Layer* create_layer(char* name) {
@@ -70,12 +71,15 @@ void add_shape_to_layer(Layer* layer, Shape* shape) {
     lst_insert_tail(layer->shapes, lst_create_node(shape));
 }
 
-void remove_shape_to_layer(Layer* layer, Shape* shape) {
+void remove_shape_from_layer(Layer* layer, Shape* shape) {
     /* Supprimer une forme d'un calque */
     lnode* node = layer->shapes->head;
     while (node != NULL) {
         if (((Layer*) get_data(node))->id != shape->id) {
             node = node->next;
+        }
+        else {
+            break;
         }
     } if (node != NULL) {
         lst_delete_node(layer->shapes, node);
