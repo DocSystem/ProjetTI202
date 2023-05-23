@@ -303,13 +303,18 @@ int main() {
                 if (SUBMODE == 1) {
                     // show list shapes
                     printAtCoos(0, 0, "Shapes:\n");
-                    printf("ID\tShape\n");
-                    lnode* n = access_layer_by_id(drawingArea->list_layers, drawingArea->id_layer)->shapes->head;
-                    while (n != NULL) {
-                        Shape* s = (Shape*) n->data;
-                        printf("%d\t", s->id);
-                        printShape(s);
-                        n = n->next;
+                    printf("ID\tLayer\tShape\n");
+                    lnode* n1 = drawingArea->list_layers->head;
+                    while (n1 != NULL) {
+                        Layer* l = (Layer*) n1->data;
+                        lnode* n2 = l->shapes->head;
+                        while (n2 != NULL) {
+                            Shape* s = (Shape*) n2->data;
+                            printf("%d\t%s\t", s->id, l->name);
+                            printShape(s);
+                            n2 = n2->next;
+                        }
+                        n1 = n1->next;
                     }
                 }
                 else if (SUBMODE == 2) {
