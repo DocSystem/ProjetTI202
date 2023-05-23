@@ -1,6 +1,6 @@
-//
-// Created by antoine7805 on 15/03/2023.
-//
+// Scribble Vibes
+// Authors : Valentin Gourjon & Antoine Souben-Fink
+// Ce fichier contient les fonctions utilitaires : affichage, commandes, etc.
 
 #include "utils.h"
 #include <stdio.h>

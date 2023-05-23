@@ -1,6 +1,6 @@
-//
-// Created by Valentin on 14/05/2023.
-//
+// Scribble Vibes
+// Authors : Valentin Gourjon & Antoine Souben-Fink
+// Ce fichier contient les fonctions de gestion d'une liste doublement chaînée
 
 #ifndef PROJETTI202_DOUBLE_CHAINED_LIST_H
 #define PROJETTI202_DOUBLE_CHAINED_LIST_H

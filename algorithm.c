@@ -1,6 +1,6 @@
-//
-// Created by antoine7805 on 15/03/2023.
-//
+// Scribble Vibes
+// Authors : Valentin Gourjon & Antoine Souben-Fink
+// Ce fichier contient les algorithmes de tracé de formes basiques : Ligne, Cercle, Courbe de Bézier
 
 #include "algorithm.h"
 #include "geometry.h"

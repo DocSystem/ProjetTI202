@@ -1,6 +1,6 @@
-//
-// Created by Valentin on 14/05/2023.
-//
+// Scribble Vibes
+// Authors : Valentin Gourjon & Antoine Souben-Fink
+// Ce fichier contient les fonctions associées aux calques : création, suppression, ajout à une liste, suppression d'une liste, rendre visible ou invisible, etc.
 
 #ifndef PROJETTI202_LAYER_H
 #define PROJETTI202_LAYER_H

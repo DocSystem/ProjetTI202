@@ -1,6 +1,6 @@
-//
-// Created by antoine7805 on 15/03/2023.
-//
+// Scribble Vibes
+// Authors : Valentin Gourjon & Antoine Souben-Fink
+// Ce fichier contient les fonctions relatives aux formes géométriques : création des formes, délétion et libération dans la mémoire, affichage en texte, transformation en liste de pixels
 
 #ifndef PROJETTI202_GEOMETRY_H
 #define PROJETTI202_GEOMETRY_H

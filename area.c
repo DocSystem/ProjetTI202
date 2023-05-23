@@ -1,6 +1,6 @@
-//
-// Created by Valentin on 14/04/2023.
-//
+// Scribble Vibes
+// Authors : Valentin Gourjon & Antoine Souben-Fink
+// Ce fichier contient les fonctions de gestion de la zone de dessin
 
 #include <stdlib.h>
 #include <stdio.h>

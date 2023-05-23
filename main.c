@@ -1,3 +1,7 @@
+// Scribble Vibes
+// Authors : Valentin Gourjon & Antoine Souben-Fink
+// Programme principal : contient la boucle principale et les fonctions associées aux commandes
+
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

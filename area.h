@@ -1,6 +1,7 @@
-//
-// Created by Valentin on 14/05/2023.
-//
+// Scribble Vibes
+// Authors : Valentin Gourjon & Antoine Souben-Fink
+// Ce fichier contient les fonctions de gestion de la zone de dessin
+
 
 #ifndef PROJETTI202_AREA_H
 #define PROJETTI202_AREA_H

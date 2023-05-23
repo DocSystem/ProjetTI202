@@ -1,7 +1,6 @@
-//
-// Created by antoine7805 on 15/03/2023.
-//
-
+// Scribble Vibes
+// Authors : Valentin Gourjon & Antoine Souben-Fink
+// Ce fichier contient les fonctions utilitaires : affichage, commandes, etc.
 #ifndef PROJETTI202_UTILS_H
 #define PROJETTI202_UTILS_H
 

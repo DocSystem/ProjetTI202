@@ -1,7 +1,6 @@
-//
-// Created by Valentin on 20/04/2023.
-//
-
+// Scribble Vibes
+// Authors : Valentin Gourjon & Antoine Souben-Fink
+// Ce fichier contient les fonctions permettant de gérer les identifiants des formes et des calques
 #ifndef PROJETTI202_ID_H
 #define PROJETTI202_ID_H
 
