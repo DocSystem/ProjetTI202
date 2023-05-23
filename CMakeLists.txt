@@ -5,7 +5,7 @@ set(CMAKE_C_STANDARD 23)
 
 include_directories(.)
 
-add_executable(ProjetTI202
+add_executable(ScribbleVibes
         algorithm.c
         algorithm.h
         area.c

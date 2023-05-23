@@ -39,3 +39,28 @@ Un éditeur d'images vectorielles dans le terminal.
 |        `set layer show [id]`         |                                         Rendre le calque d'identifiant `id` visible                                          |
 |        `set layer hide [id]`         |                                        Rendre le calque d'identifiant `id` invisible                                         |
 
+## Exécution du programme
+
+### Depuis GitHub Actions
+
+* [Linux](https://nightly.link/DocSystem/ScribbleVibes/workflows/cmake-ubuntu/main/ScribbleVibes)
+* [macOS](https://nightly.link/DocSystem/ScribbleVibes/workflows/cmake-macos/main/ScribbleVibes)
+* [Windows](https://nightly.link/DocSystem/ScribbleVibes/workflows/cmake-windows/main/ScribbleVibes)
+
+### Depuis le code source
+
+* Sur Linux et macOS, exécutez les commandes suivantes :
+```bash
+mkdir build
+cd build
+cmake ..
+make
+./ScribbleVibes
+```
+
+* Sur Windows, exécutez les commandes suivantes :
+```batch
+cmake .
+cmake --build . --config Release
+Release\ScribbleVibes.exe
+```

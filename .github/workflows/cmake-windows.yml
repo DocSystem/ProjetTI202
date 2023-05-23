@@ -26,5 +26,5 @@ jobs:
         # Upload the build artifact for later use as a release asset
         uses: actions/upload-artifact@v2
         with:
-          name: ProjetTI202
-          path: Release/ProjetTI202.exe
+          name: ScribbleVibes
+          path: Release/ScribbleVibes.exe
