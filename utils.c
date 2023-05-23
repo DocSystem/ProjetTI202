@@ -114,7 +114,7 @@ void printHelp() {
     printf("\trectangle <x> <y> <width> <height> : Ajoute un rectangle\n");
     printf("\tpolygon <x1> <y1> <x2> <y2> ... <xn> <yn> : Ajoute un polygone\n");
     printf("Calques :\n");
-    printf("\tlist layer : Liste les calques\n");
+    printf("\tlist layers : Liste les calques\n");
     printf("\tnew layer <name> : Ajoute un calque de nom <name>\n");
     printf("\tlayer <id> : Sélectionne le calque <id>\n");
     printf("\tdelete layer <id> : Supprime le calque <id>\n");

@@ -152,7 +152,7 @@ void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
             *MODE = 1;
             *SUBMODE = 1;
         }
-        else if (strcmp(command.args[0], "layer") == 0) {
+        else if (strcmp(command.args[0], "layers") == 0) {
             *MODE = 1;
             *SUBMODE = 2;
         }

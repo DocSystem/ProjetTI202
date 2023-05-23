@@ -32,7 +32,7 @@ Un éditeur d'images vectorielles dans le terminal.
 | `rectangle [x] [y] [width] [height]` | Ajouter un rectangle dont le sommet supérieur gauche à pour coordonnées (`x`,`y`), de largeur `width` et de hauteur `height` |
 | `polygon [x1] [y1] [...] [xn] [yn]`  |                    Ajouter un polygone dont les sommets sont les coordonnées (`x1`,`y1`) ... (`xn`,`yn`)                     |
 |              *Calques*               |                                                                                                                              |
-|             `list layer`             |                                                Afficher la liste des calques                                                 |
+|            `list layers`             |                                                Afficher la liste des calques                                                 |
 |          `new layer [name]`          |                                            Créer un nouveau calque de nom `name`                                             |
 |             `layer [id]`             |                                            Aller sur le calque d'identifiant `ìd`                                            |
 |         `delete layer [id]`          |                                            Supprimer le calque d'identifiant `id`                                            |
