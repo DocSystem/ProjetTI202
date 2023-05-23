@@ -62,12 +62,12 @@ void erase_area(Area* area) {
      * de la structure Area
      */
     // Reset la matrice avec des 0
-     clear_area(area);
+    clear_area(area);
     // Reset le tableau des formes
     Layer* current_layer = access_layer_by_id(area->list_layers, area->id_layer);
 
     lst_delete_list(current_layer->shapes);
-    current_layer->shapes = NULL;
+    current_layer->shapes = lst_create_list();
 }
 
 void delete_area(Area* area) {
