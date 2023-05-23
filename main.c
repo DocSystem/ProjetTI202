@@ -1,13 +1,12 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "menu.h"
+#include <stdio.h>
 #include "geometry.h"
 #include "utils.h"
-#include "chained_list.h"
 #include "area.h"
+#include "layer.h"
 
-void execCmd(int* error, Area* area, int* MODE) {
+void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
     // split cmd into two variables
     // first variable is the command
     // second variable is an array of arguments
@@ -144,13 +143,113 @@ void execCmd(int* error, Area* area, int* MODE) {
         *MODE = 0;
     }
     else if (strcmp(command.command, "list") == 0) {
-        *MODE = 1;
+        // list <shapes|layer>
+        if (command.arg_count != 1) {
+            *error = 1;
+            return;
+        }
+        if (strcmp(command.args[0], "shapes") == 0) {
+            *MODE = 1;
+            *SUBMODE = 1;
+        }
+        else if (strcmp(command.args[0], "layer") == 0) {
+            *MODE = 1;
+            *SUBMODE = 2;
+        }
+        else {
+            *error = 1;
+        }
     }
     else if (strcmp(command.command, "delete") == 0) {
-        // delete <id>
+        // delete <shape|layer> <id>
+        if (command.arg_count != 2) {
+            *error = 1;
+            return;
+        }
+        if (strcmp(command.args[0], "shape") == 0) {
+            // delete shape <id>
+        }
+        else if (strcmp(command.args[0], "layer") == 0) {
+            // delete layer <id>
+            Layer* l = access_layer_by_id(area->list_layers, parseInt(command.args[1]));
+            remove_layer_from_list(area->list_layers, l);
+            delete_layer(l);
+        }
+        else {
+            *error = 1;
+        }
     }
     else if (strcmp(command.command, "erase") == 0) {
         erase_area(area);
+    }
+    else if (strcmp(command.command, "new") == 0) {
+        // new layer <name>
+        if (command.arg_count != 2) {
+            *error = 1;
+            return;
+        }
+        if (strcmp(command.args[0], "layer") == 0) {
+            // new layer <name>
+            Layer* l = create_layer(command.args[1]);
+            add_layer_to_list(area->list_layers, l);
+            area->id_layer = l->id;
+        }
+        else {
+            *error = 1;
+        }
+    }
+    else if (strcmp(command.command, "layer") == 0) {
+        // layer <id>
+        if (command.arg_count != 1) {
+            *error = 1;
+            return;
+        }
+        int id = parseInt(command.args[0]);
+        if (id < 0) {
+            *error = 1;
+            return;
+        }
+        Layer* l = access_layer_by_id(area->list_layers, id);
+        if (l == NULL) {
+            *error = 1;
+            return;
+        }
+        // set current layer
+        area->id_layer = id;
+    }
+    else if (strcmp(command.command, "set") == 0) {
+        // set layer <visible|hide> <id>
+        if (command.arg_count != 3) {
+            *error = 1;
+            return;
+        }
+        if (strcmp(command.args[0], "layer") == 0) {
+            // set layer <visible|hide> <id>
+            int id = parseInt(command.args[2]);
+            if (id < 0) {
+                *error = 1;
+                return;
+            }
+            Layer* l = access_layer_by_id(area->list_layers, id);
+            if (l == NULL) {
+                *error = 1;
+                return;
+            }
+            if (strcmp(command.args[1], "visible") == 0) {
+                set_layer_visible(l);
+            }
+            else if (strcmp(command.args[1], "hide") == 0) {
+                set_layer_invisible(l);
+            }
+            else {
+                *error = 1;
+                return;
+            }
+        }
+        else {
+            *error = 1;
+            return;
+        }
     }
     else if (strcmp(command.command, "help") == 0) {
         *MODE = 2;
@@ -178,6 +277,7 @@ int main() {
     //showWindowBox();
 
     int MODE = 0;
+    int SUBMODE = 0;
 
     win_size size = getWindowSize();
 
@@ -199,7 +299,30 @@ int main() {
                 break;
 
             case 1:
-                // show points list (command `list`)
+                // show list
+                if (SUBMODE == 1) {
+                    // show list shapes
+
+                }
+                else if (SUBMODE == 2) {
+                    // show list layer
+                    printAtCoos(0, 0, "Layers:\n");
+                    printf("ID\tName\tVisible\tSelected\n");
+                    int i = 1;
+                    lnode* n = drawingArea->list_layers->head;
+                    while (n != NULL) {
+                        Layer* l = (Layer*) n->data;
+                        char* visible = l->visible ? "❌" : "✅";
+                        char* selected = drawingArea->id_layer == l->id ? "✅" : "❌";
+                        char* name = l->name;
+                        int id = l->id;
+                        printf("%d\t%s\t%s\t%s\n", id, name, visible, selected);
+                        n = n->next;
+                    }
+                }
+                else {
+                    MODE = 0;
+                }
                 break;
 
             case 2:
@@ -218,7 +341,7 @@ int main() {
         if (error == 1) {
             printAtCoos(size.width - 1, size.height, "❌");
         }
-        execCmd(&error, drawingArea, &MODE);
+        execCmd(&error, drawingArea, &MODE, &SUBMODE);
     }
 
     return 0;
