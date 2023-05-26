@@ -122,6 +122,29 @@ void execCmd(int* error, Area* area, int* MODE, int* SUBMODE) {
         // add polygon to area
         add_shape_to_area(area, p);
     }
+    else if (strcmp(command.command, "curve") == 0) {
+        // curve <x1> <y1> <x2> <y2> <x3> <y3> <x4> <y4>
+        if (command.arg_count != 8) {
+            *error = 1;
+            return;
+        }
+        int x1 = parseInt(command.args[0]);
+        int y1 = parseInt(command.args[1]);
+        int x2 = parseInt(command.args[2]);
+        int y2 = parseInt(command.args[3]);
+        int x3 = parseInt(command.args[4]);
+        int y3 = parseInt(command.args[5]);
+        int x4 = parseInt(command.args[6]);
+        int y4 = parseInt(command.args[7]);
+
+        Point* p1 = createPoint(x1, y1);
+        Point* p2 = createPoint(x2, y2);
+        Point* p3 = createPoint(x3, y3);
+        Point* p4 = createPoint(x4, y4);
+        Shape* c = createCurveShape(p1, p2, p3, p4);
+        // add curve to area
+        add_shape_to_area(area, c);
+    }
     else if (strcmp(command.command, "plot") == 0) {
         // plot
         *MODE = 0;
