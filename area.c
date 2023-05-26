@@ -129,6 +129,7 @@ void draw_area(Area* area) {
             pixel = get_data(node_pixel);
         }
     }
+    lst_delete_list(pixels);
 }
 
 
